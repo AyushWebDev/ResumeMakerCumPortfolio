@@ -17,13 +17,6 @@ body{
 {
     height: 100%;
 }
-.fas,.far
-{
-    font-size: large;
-    padding: 1vw;
-    color: white !important;
-
-}
 
 .btn {
     padding: 2px;
@@ -35,9 +28,9 @@ body{
 }
 .detail-holder
 {
-    background-color: #0b0a0a;
+    /* background-color: #0b0a0a; */
     width: 100%;
-    color: rgb(248, 240, 240) !important;
+    /* color: rgb(248, 240, 240) !important; */
     font-size: 18px;
     font-weight: 500;
 }
