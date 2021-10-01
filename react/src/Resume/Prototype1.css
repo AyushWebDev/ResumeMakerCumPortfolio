@@ -1,0 +1,75 @@
+.container
+{
+    width: 60%;
+    overflow-x: hidden;
+    font-style: normal;
+    font-family:initial;
+    bottom: 0px;
+}
+html, body {
+    margin:0px;
+    height: 100vh !important;;
+}
+.sidemenu
+{
+    padding: 0%;
+}
+.row{
+    margin: 0px;
+    font-size: 21px;
+}
+.full
+{
+    float: left !important;
+    padding: 0%; 
+    margin: 0%;
+}
+.col-sm-4,.col-sm-8,.col-sm-6,.col-sm-9
+{
+    height: max-content;
+    padding: 0%;
+}
+.box1
+{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(30, 31, 30);
+    color: rgb(255, 255, 255);
+    text-align: justify;
+}
+.name
+{
+    padding-top: 30px;
+    padding-left: 8%;
+}
+.box1-1
+{
+    background-color: rgb(252, 74, 74);
+    height: 100%;
+}
+.fas,.far,.fab
+{
+    color: rgb(5, 5, 5) ;
+    font-size: 20px;
+}
+.fab{margin-left: 14px;}
+.box1-2
+{
+    width: 100%;
+    height: 100%;
+    color: white;
+    padding-top: 50px;
+    background-color: rgb(30, 31, 30);
+    text-align: justify;
+}
+.box1-2 h3
+{
+    color: rgb(252, 74, 74);
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+.box1-2 .row
+{
+    padding-bottom: 10px;
+}
