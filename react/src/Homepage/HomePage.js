@@ -13,6 +13,12 @@ import 'aos/dist/aos.css'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {signout,isAuthenticated} from '../user/auth';
+import QueueAnim from 'rc-queue-anim';
+import Footer from 'rc-footer';
+import 'rc-footer/assets/index.css';
+import 'antd/dist/antd.css';
+import { Layout, Menu, Breadcrumb } from 'antd';
+const { Header, Content,Sider} = Layout;
 AOS.init();
 var template=[
     {image:Template1,
@@ -59,7 +65,7 @@ class HomePage extends Component
             slidesToScroll: 1
           };
         return(
-           
+           <QueueAnim delay={300} className='queue-simple'>
             <div className="parallax">
                 <nav class="navbar  navbar-expand-lg navbar-dark" data-aos="zoom-in" data-aos-duration="1000">
                     <p className="navbar-brand " style={{paddingTop:'10px'}}><i className="fas fa-toolbox " style={{fontSize:'24 px'}}></i>Resume Maker </p>
@@ -103,19 +109,24 @@ class HomePage extends Component
                 </nav>
                 <div className="container-fluid">
                     <section className="detail-holder">
-                        <div className="container ">
-                            <div className="row"  data-aos="zoom-in" data-aos-duration="800">
-                                <h1 style={{marginTop:'150px'}}> Resume Templates</h1>
-                                <p class="text-like-h3 text-bold" style={{marginTop:'175px'}} >/ Pick one from our Resume Templates</p>
-                                <div className="center-text">
-                                    <p><i class="fas fa-quote-left"></i>Making a resume is the first step of any job search. Not sure how to make a resume? 
-                                         Our resume builder gives you resume templates to follow.<i class="fas fa-quote-right"></i></p>
-                                </div>
-                                <div className="col-sm-4">
-                                    <img src={Temp}></img>
-                                </div>
-                            </div>  
-                        </div>                       
+                        <Layout>
+                            {/* <Header>Header</Header> */}
+                            <Layout>
+                                <Sider style={{backgroundColor: '#f0f0f0'}}>left Sidebar</Sider>
+                                <Content style={{backgroundColor: '#f0f0f0'}}>
+                                        <div className="row"  data-aos="zoom-in" data-aos-duration="800">
+                                        <h1 style={{marginTop:'150px'}}> Resume Templates</h1>
+                                        <p class="text-like-h3 text-bold" style={{marginTop:'175px'}} >/ Pick one from our Resume Templates</p>
+                                        <div className="center-text">
+                                            <p><i class="fas fa-quote-left"></i>The online resume builder getting folks hired by BBC, Google, Apple, Tesla, and Airbnb.<i class="fas fa-quote-right"></i></p>
+                                        </div>
+                                        <div className="col-sm-4">
+                                            <img src={Temp}></img>
+                                        </div>
+                                        </div> 
+                                </Content>
+                                <Sider style={{backgroundColor: '#f0f0f0'}}>Right Sider</Sider>
+                            </Layout>
                         <div className="row">
                             <div className='container'>
                             <Slider {...settings}>
@@ -141,9 +152,43 @@ class HomePage extends Component
                         </Slider>
                         </div>
                     </div>
+                    </Layout>
                     </section> 
                 </div>
+                <Footer
+                    columns={[
+                    {
+                        icon: (
+                        <img src="https://gw.alipayobjects.com/zos/rmsportal/XuVpGqBFxXplzvLjJBZB.svg" />
+                        ),
+                        title: 'Harsh Shukla',
+                        url: 'https://yuque.com',
+                        description: 'Harsh Shukla SDE Intern at Amazon',
+                        openExternal: true,
+                    },
+                    {
+                        icon: (
+                        <img src="https://gw.alipayobjects.com/zos/rmsportal/XuVpGqBFxXplzvLjJBZB.svg" />
+                        ),
+                        title: 'Ayush Mishra',
+                        url: 'https://yuque.com',
+                        description: 'Harsh Shukla SDE Intern at Amazon',
+                        openExternal: true,
+                    },
+                    {
+                        icon: (
+                        <img src="https://gw.alipayobjects.com/zos/rmsportal/XuVpGqBFxXplzvLjJBZB.svg" />
+                        ),
+                        title: 'Shubham Pathak',
+                        url: 'https://yuque.com',
+                        description: 'Harsh Shukla SDE Intern at Amazon',
+                        openExternal: true,
+                    },
+                    ]}
+                    bottom="Made with ❤️ by Ayush, Harsh and Shubham"
+                />
             </div>
+            </QueueAnim>
     )};
 }
 export default HomePage;
