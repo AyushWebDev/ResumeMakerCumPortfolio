@@ -17,8 +17,20 @@ import QueueAnim from 'rc-queue-anim';
 import Footer from 'rc-footer';
 import 'rc-footer/assets/index.css';
 import 'antd/dist/antd.css';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu, Breadcrumb, Card, Button , Carousel} from 'antd';
 const { Header, Content,Sider} = Layout;
+const cardstyle={
+    color:'#878eb3',
+    borderColor:'#979696d3',
+    fontStyle:'italic',
+    backgroundColor:'#fdfcfcd3'
+};
+const buttonstyle={
+    color:'black',
+    borderColor:'#979696d3',
+    fontStyle:'italic',
+    backgroundColor:'#fdfcfcd3'
+};
 AOS.init();
 var template=[
     {image:Template1,
@@ -68,7 +80,7 @@ class HomePage extends Component
            <QueueAnim delay={300} className='queue-simple'>
             <div className="parallax">
                 <nav class="navbar  navbar-expand-lg navbar-dark" data-aos="zoom-in" data-aos-duration="1000">
-                    <p className="navbar-brand " style={{paddingTop:'10px'}}><i className="fas fa-toolbox " style={{fontSize:'24 px'}}></i>Resume Maker </p>
+                    <p className="navbar-brand " style={{paddingTop:'10px'}}><i className="fas fa-toolbox " style={{fontSize:'24 px'}}></i>Resume Maker Cum Portfolio </p>
                     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -112,20 +124,27 @@ class HomePage extends Component
                         <Layout>
                             {/* <Header>Header</Header> */}
                             <Layout>
-                                <Sider style={{backgroundColor: '#f0f0f0'}}>left Sidebar</Sider>
+                                <Sider style={{backgroundColor: '#f0f0f0'}}></Sider>
                                 <Content style={{backgroundColor: '#f0f0f0'}}>
                                         <div className="row"  data-aos="zoom-in" data-aos-duration="800">
-                                        <h1 style={{marginTop:'150px'}}> Resume Templates</h1>
+                                        <h1 style={{marginTop:'150px'}}> Resume Maker cum Portfolio</h1>
                                         <p class="text-like-h3 text-bold" style={{marginTop:'175px'}} >/ Pick one from our Resume Templates</p>
                                         <div className="center-text">
-                                            <p><i class="fas fa-quote-left"></i>The online resume builder getting folks hired by BBC, Google, Apple, Tesla, and Airbnb.<i class="fas fa-quote-right"></i></p>
+                                            <p><i class="fas fa-quote-left"></i>The online resume builder getting folks hired by Amazon, Google, Apple, Microsoft, and Netflix.<i class="fas fa-quote-right"></i></p>
+                                            <Card title="For Employee" style={cardstyle} extra={<Button style={buttonstyle} >Enter Portal</Button>}>
+                                               Build your brand new resume in as little as in 5 minutes.
+                                        </Card>
+                                                <br />
+                                        <Card title="For Employer" style={cardstyle} extra={<Button style={buttonstyle}>Enter Portal</Button>}>
+                                                Hire the best talent whose profile meets job requirement.
+                                        </Card> 
                                         </div>
                                         <div className="col-sm-4">
-                                            <img src={Temp}></img>
+                                            <img className='bannerimg' src={Temp} />
                                         </div>
-                                        </div> 
+                                        </div>
                                 </Content>
-                                <Sider style={{backgroundColor: '#f0f0f0'}}>Right Sider</Sider>
+                                <Sider style={{backgroundColor: '#f0f0f0'}}></Sider>
                             </Layout>
                         <div className="row">
                             <div className='container'>

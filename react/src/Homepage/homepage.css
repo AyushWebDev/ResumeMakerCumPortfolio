@@ -13,9 +13,17 @@ body{
     font-style: normal;
     font-family:initial;
 }
+.bannerimg
+{
+    border: 1px solid #ddd;
+     border-radius: 50%;
+     padding: 5px;
+    width: 500px;
+}
 .row
 {
     height: 100%;
+    /* color: #fdfcfcd3; */
 }
 
 .btn {
