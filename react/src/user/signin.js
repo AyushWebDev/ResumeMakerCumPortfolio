@@ -2,6 +2,7 @@ import React from 'react';
 import './signup.css';
 import {isAuthenticated, signin} from "./auth";
 import {Link,Redirect} from 'react-router-dom';
+import Footer from 'rc-footer';
 import Login from '../image/Register.jpg'
 const errorStyle={
     textAlign: "center"
@@ -95,47 +96,73 @@ class Signin extends React.Component{
             <div className="sign">
                 <div className="container cont">
                     <div className="row">
-                        <div className="col-md-4"  style={{padding:'0px'}}>
+                        {/* <div className="col-md-4"  style={{padding:'0px'}}>
                             <img src={Login} style={{width:'100%',height:'100%'}}/>
-                        </div>
-                        <div className="col-md-8" style={{marginTop:'80px'}}>
+                        </div> */}
+                        <div className="col-md-12">
                             <div className="navigate">
                                 <ul className="pagination">
                                     <li className="page-item"><Link to='/signup' className='page-link'><h5>Register</h5></Link></li>
                                     <li className="page-item active"><Link to='#' className='page-link'><h5>Login</h5></Link></li>
                                 </ul>   
                             </div>
-                            <form onSubmit={this.handleSubmit}> 
+                             <form className='form-style-10' onSubmit={this.handleSubmit}>
                                 {this.state.error && 
-                                <div className="alert alert-danger" style={errorStyle}>
-                                    <i className='fas fa-exclamation-circle' style={{color:"red"}}></i> {this.state.error.toUpperCase()}
-                                </div>
+                                    <div className="alert alert-danger" style={errorStyle}>
+                                        <i className='fas fa-exclamation-circle' style={{color:"red"}}></i> {this.state.error.toUpperCase()}
+                                    </div>
                                 }
-                                <div className="container" >
-                                    <div className="row">
-                                        <div className="col-md-4"></div>
-                                    <div className="">
-                                    
-                                    <div className="form-group">
-                                        <label><i className="fa fa-envelope" aria-hidden="true"></i></label>
-                                        <input type="email" className="form-control" placeholder="Enter Email" onChange={this.handleChange("email")} value={this.state.email}></input>
-                                    </div>
-                                    <div className="form-group">
-                                        <label><i class="fa fa-key" aria-hidden="true"></i></label>
-                                        <input type="password" className="form-control" placeholder="Enter Password" onChange={this.handleChange("password")} value={this.state.password}></input>
-                                    </div>
-                                    <div className="">
-                                            <button type="submit" className="btn btn-warning btn-block mybtn">Login</button>
-                                            <p style={{fontSize: "14px",textAlign: "center"}}>Don't have an Account? <Link to="/signup">Create Account</Link></p>
-                                        </div>
-                                    </div>
-                               </div>
-                               </div>
-                                
+                                <h1>Sign In Now!<span>Sign in and build your profile more interactive!</span></h1>
+                                <div className="section"><span>1</span>E-mail</div>
+                                <div className="inner-wrap">
+                                    <label>Your Full Name <input type="email" name="field1" onChange={this.handleChange("email")} value={this.state.email} /></label>
+                                </div>
+                                <div className="section"><span>2</span>Password</div>
+                                <div className="inner-wrap">
+                                    <label>Password <input type="password" name="field5" onChange={this.handleChange("password")} value={this.state.password} /></label>
+                                </div>
+                                <div className="button-section">
+                                    <input type="submit" name="Sign Up" />
+                                    <span className="privacy-policy">
+                                    <p style={{fontSize: "14px",textAlign: "center"}}>Don't have an Account? <Link to="/signup">Create Account</Link></p> 
+                                    </span>
+                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
+                <Footer
+                    columns={[
+                    {
+                        icon: (
+                        <img src="https://gw.alipayobjects.com/zos/rmsportal/XuVpGqBFxXplzvLjJBZB.svg" />
+                        ),
+                        title: 'Harsh Shukla',
+                        url: 'https://yuque.com',
+                        description: 'Harsh Shukla SDE Intern at Amazon',
+                        openExternal: true,
+                    },
+                    {
+                        icon: (
+                        <img src="https://gw.alipayobjects.com/zos/rmsportal/XuVpGqBFxXplzvLjJBZB.svg" />
+                        ),
+                        title: 'Ayush Mishra',
+                        url: 'https://yuque.com',
+                        description: 'Harsh Shukla SDE Intern at Amazon',
+                        openExternal: true,
+                    },
+                    {
+                        icon: (
+                        <img src="https://gw.alipayobjects.com/zos/rmsportal/XuVpGqBFxXplzvLjJBZB.svg" />
+                        ),
+                        title: 'Shubham Pathak',
+                        url: 'https://yuque.com',
+                        description: 'Harsh Shukla SDE Intern at Amazon',
+                        openExternal: true,
+                    },
+                    ]}
+                    bottom="Made with ❤️ by Ayush, Harsh and Shubham"
+                />
             </div>
         )
     }
