@@ -1,7 +1,11 @@
 import React from 'react';
 import {isAuthenticated,getEdu,delEdu} from '../user/auth';
 import '../user/profile.css'
-
+import 'antd/dist/antd.css';
+// import './index.css';
+import { Collapse } from 'antd';
+import { CaretRightOutlined ,DeleteOutlined,BookOutlined,CalendarOutlined,BuildOutlined} from '@ant-design/icons';
+const { Panel } = Collapse;
 class Edu extends React.Component{
     constructor(props){
         super(props);
@@ -41,21 +45,32 @@ class Edu extends React.Component{
     render(){
         return(
             <div>
+                <p><BookOutlined /> Education</p>
             <div className="list-group"> 
                 {
                     this.state.education.map((edu,key)=>(
-                        
                         <div>
-                        <ul className="list-group list-group-flush">
-                            <li className="list-group-item title"><h4><i className="fas fa-university"></i><b>{edu.title}</b></h4></li>
-                            <li className="list-group-item detail">{edu.year.start} - {edu.year.end}</li>
-                            <li className="list-group-item detail">{edu.institute}</li>
-                        </ul>
-                        
-                        <div className="col-md-6">
-                            <button onClick={()=>this.handleDelete(edu._id)} className="btn btn-danger" style={{backgroundColor: "#ed5249"}}>Delete</button>
-                        </div>
-                        
+                            <Collapse
+                                bordered={false}
+                                expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
+                                className="site-collapse-custom-collapse"
+                                destroyInactivePanel={true}
+                                key={key}
+                                bordered={false}
+                            >
+                                <Panel header={edu.title} key={key} className="site-collapse-custom-panel" extra={<DeleteOutlined onClick={()=>this.handleDelete(edu._id)}/>}>
+                                    <table>
+                                        <tr>
+                                            <td style={{width:'10%'}}><CalendarOutlined /></td>
+                                            <td>{edu.year.start} - {edu.year.end}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style={{width:'10%'}}><BuildOutlined /></td>
+                                            <td>{edu.institute}</td>
+                                        </tr>
+                                    </table>
+                                </Panel>
+                            </Collapse>
                         </div>
                           
                     ))
