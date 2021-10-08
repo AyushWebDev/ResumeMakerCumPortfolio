@@ -3,6 +3,7 @@ import './signup.css';
 import {isAuthenticated, signin} from "./auth";
 import {Link,Redirect} from 'react-router-dom';
 import Footer from 'rc-footer';
+import { message } from 'antd';
 import Login from '../image/Register.jpg'
 const errorStyle={
     textAlign: "center"
@@ -108,9 +109,7 @@ class Signin extends React.Component{
                             </div>
                              <form className='form-style-10' onSubmit={this.handleSubmit}>
                                 {this.state.error && 
-                                    <div className="alert alert-danger" style={errorStyle}>
-                                        <i className='fas fa-exclamation-circle' style={{color:"red"}}></i> {this.state.error.toUpperCase()}
-                                    </div>
+                                        message.error(this.state.error.toLocaleUpperCase())
                                 }
                                 <h1>Sign In Now!<span>Sign in and build your profile more interactive!</span></h1>
                                 <div className="section"><span>1</span>E-mail</div>

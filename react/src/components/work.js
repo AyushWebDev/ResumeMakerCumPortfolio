@@ -1,6 +1,8 @@
 import React from 'react';
 import {isAuthenticated,getWork,delWork} from '../user/auth';
-
+import { Collapse } from 'antd';
+import { CaretRightOutlined ,DeleteOutlined,BookOutlined,CalendarOutlined,BuildOutlined} from '@ant-design/icons';
+const { Panel } = Collapse;
 class Work extends React.Component{
     constructor(props){
         super(props);
@@ -44,14 +46,27 @@ class Work extends React.Component{
                 {
                     this.state.work.map((w,key)=>(
                         <div>
-                        <ul className="list-group list-group-flush">
-                            <li className="list-group-item title"><h4><i class="fas fa-briefcase"></i><b>{w.title}</b></h4></li>
-                            <li className="list-group-item detail">{w.year.start} {w.year.end}</li>
-                            <li className="list-group-item detail">{w.description}</li>
-                        </ul>
-                        <div className="col-md-6">
-                        <button onClick={()=>this.handleDelete(w._id)} className="btn btn-danger" style={{backgroundColor: "#ed5249"}}>Delete</button>
-                        </div>
+                            <Collapse
+                                bordered={false}
+                                expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
+                                className="site-collapse-custom-collapse"
+                                destroyInactivePanel={true}
+                                key={key}
+                                bordered={false}
+                            >
+                                <Panel header={w.title} key={key} className="site-collapse-custom-panel" extra={<DeleteOutlined onClick={()=>this.handleDelete(w._id)}/>}>
+                                    <table>
+                                        <tr>
+                                            <td style={{width:'10%'}}><CalendarOutlined /></td>
+                                            <td>{w.year.start} - {w.year.end}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style={{width:'10%'}}><BuildOutlined /></td>
+                                            <td>{w.description}</td>
+                                        </tr>
+                                    </table>
+                                </Panel>
+                            </Collapse>
                         </div>
                     ))
                 }

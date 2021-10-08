@@ -1,6 +1,8 @@
 import React from 'react';
 import {isAuthenticated,getSkill,delSkill} from '../user/auth';
-
+import { Collapse } from 'antd';
+import { CaretRightOutlined ,DeleteOutlined,BookOutlined,CalendarOutlined,BuildOutlined} from '@ant-design/icons';
+const { Panel } = Collapse;
 class Skill extends React.Component{
     constructor(props){
         super(props);
@@ -18,7 +20,7 @@ class Skill extends React.Component{
         else{
             this.setState({
                 skill: data.skills
-            })
+            }) 
         }
     }
     deleteSkill=async (eid)=>{
@@ -43,18 +45,20 @@ class Skill extends React.Component{
                 {
                     this.state.skill.map((s,key)=>(
                         <div>
-                        <ul className="list-group list-group-flush">
-                            <li className="list-group-item title"><h4> <i class="fas fa-pen-nib"></i><b>{s.title}</b></h4></li>
-                            <li className="list-group-item detail">
+                            <Collapse
+                                bordered={false}
+                                expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
+                                className="site-collapse-custom-collapse"
+                                destroyInactivePanel={true}
+                                key={key}
+                                bordered={false}
+                            >
+                                <Panel header={s.title} key={key} className="site-collapse-custom-panel" extra={<DeleteOutlined onClick={()=>this.handleDelete(s._id)}/>}>
                                 <div className="progress">
-                                    <div className="progress-bar" style={{width:`${s.rate/10*100}%`}}></div>
-                                </div>
-                                {/* {s.rate} */}
-                            </li>
-                        </ul>
-                        <div>
-                        <button onClick={()=>this.handleDelete(s._id)} className="btn btn-danger" style={{backgroundColor: "#ed5249"}}>Delete</button>
-                        </div>
+                                     <div className="progress-bar" style={{width:`${s.rate/10*100}%`}}></div>
+                                 </div>
+                                </Panel>
+                            </Collapse>
                         </div>
                     ))
                 }

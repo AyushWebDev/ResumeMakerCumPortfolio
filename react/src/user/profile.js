@@ -1,13 +1,27 @@
 import React from 'react';
 import defaultImage from '../image/avatar.png';
 import { getBasics,isAuthenticated,delEdu} from './auth';
-import {BrowserRouter,Switch,Route,Link} from 'react-router-dom';
-import Edu from '../components/edu';
-import Work from '../components/work';
-import Achievement from '../components/achievement';
-import Skill from '../components/skill';
 import './profile.css'
-
+import 'antd/dist/antd.css';
+import { Card ,Grid} from 'antd';
+import { EditOutlined } from '@ant-design/icons';
+const gridStyle = {
+    width: '75%',
+    textAlign: 'center',
+    fontSize:'20px',
+    border:'solid 3px white',
+    background: '#e5eef1'
+  };
+const attributeStyle = {
+    width:'25%',
+    textAlign: 'center',
+    fontSize:'20px',
+    border:'solid 3px white',
+   background: '#e5eef1'
+  };
+const cardstyle={
+    width:'fit-content',
+}
 class Profile extends React.Component{
     constructor(){
         super();
@@ -49,47 +63,18 @@ class Profile extends React.Component{
 
     render(){
         return(
-            <BrowserRouter>
-            <div className="main">
-                <div className="container profile"> 
-                    <div className="row">
-                        <div className="col-md-4 card">
-                            <div >
-                                <img className="card-img-top" src={defaultImage} alt="Card image cap"/>
-                                <div className="card-body">
-                                    <h3 className="card-title">{this.state.firstname} {this.state.lastname}</h3>
-                                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                                <div>
-                                    <p><i className="pic fa fa-envelope" aria-hidden="true"></i> {this.state.email}</p>
-                                    <p><i className="pic fas fa-phone"></i> {this.state.phone}</p>
-                                    <p><i className="pic fas fa-map-marker-alt"></i> {this.state.address}</p>
-                                    <p><i className="pic fab fa-linkedin-in"></i> {this.state.linkedin}</p>
-                                </div>
-                            </div>       
-                        </div>
-                        <div className="col-md-8 conta"> 
-                                    <ul className="nav nav-tabs">
-                                    <li className="nav-item"><Link to={`/profile/${this.props.match.params.userid}/edu/${this.props.match.params.userid}`} className="nav-link">Education</Link></li>
-                                    <li className="nav-item"><Link to={`/profile/${this.props.match.params.userid}/work/${this.props.match.params.userid}`} className="nav-link">Work</Link></li>
-                                    <li className="nav-item"><Link to={`/profile/${this.props.match.params.userid}/achievement/${this.props.match.params.userid}`} className="nav-link">Achievement</Link></li>
-                                    <li className="nav-item"><Link to={`/profile/${this.props.match.params.userid}/skill/${this.props.match.params.userid}`} className="nav-link">Skills</Link></li>
-                                    </ul>
-                                    <Switch>
-                                        <Route exact path='/profile/:userid/edu/:id' component={Edu}></Route>
-                                        <Route exact path='/profile/:userid/work/:id' component={Work}></Route>
-                                        <Route exact path='/profile/:userid/skill/:id' component={Skill}></Route>
-                                        <Route exact path='/profile/:userid/achievement/:id' component={Achievement}></Route>
-                                        
-                                    </Switch>
-                        
-                        </div>    
-
-                        </div>
-                        </div>
-                    </div>
-                    </BrowserRouter>
-               
+            <Card title='Profile Card'type='inner' bodyStyle={cardstyle} extra={<EditOutlined/>}>
+                <Card.Grid style={attributeStyle} hoverable={false}>Name</Card.Grid>
+                <Card.Grid style={gridStyle}>{this.state.firstname+' '+this.state.lastname}</Card.Grid>
+                <Card.Grid style={attributeStyle} hoverable={false}>Email </Card.Grid>
+                <Card.Grid style={gridStyle}>{this.state.email}</Card.Grid>
+                <Card.Grid style={attributeStyle} hoverable={false}>Phone</Card.Grid>
+                <Card.Grid style={gridStyle}>{this.state.phone}</Card.Grid>
+                <Card.Grid style={attributeStyle} hoverable={false}>LinkedIn</Card.Grid>
+                <Card.Grid style={gridStyle}>{this.state.linkedin}</Card.Grid>
+                <Card.Grid style={attributeStyle} hoverable={false}>Address</Card.Grid>
+                <Card.Grid style={gridStyle}>{this.state.address}</Card.Grid>
+            </Card>
         )
     }
 }

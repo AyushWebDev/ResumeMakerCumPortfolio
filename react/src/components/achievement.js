@@ -1,6 +1,8 @@
 import React from 'react';
 import {isAuthenticated,getAch,delAch} from '../user/auth';
-
+import { Collapse } from 'antd';
+import { CaretRightOutlined ,DeleteOutlined,BookOutlined,CalendarOutlined,BuildOutlined} from '@ant-design/icons';
+const { Panel } = Collapse;
 class Achievement extends React.Component{
     constructor(props){
         super(props);
@@ -43,14 +45,19 @@ class Achievement extends React.Component{
                 {
                     this.state.achievement.map((ach,key)=>(
                         <div>
-                        <ul className="list-group list-group-flush">
-                            <li className="list-group-item title"><h4><i class="fas fa-briefcase"></i><b>{ach.title}</b></h4></li>
-                            <li className="list-group-item detail">{ach.description}</li>
-                        </ul>
-                         <div>
-                         <button onClick={()=>this.handleDelete(ach._id)} className="btn btn-danger" style={{backgroundColor: "#ed5249"}}>Delete</button>
-                         </div>
-                         </div>
+                            <Collapse
+                                bordered={false}
+                                expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
+                                className="site-collapse-custom-collapse"
+                                destroyInactivePanel={true}
+                                key={key}
+                                bordered={false}
+                            >
+                                <Panel header={ach.title} key={key} className="site-collapse-custom-panel" extra={<DeleteOutlined onClick={()=>this.handleDelete(ach._id)}/>}>
+                                    <p>{ach.description}</p>
+                                </Panel>
+                            </Collapse>
+                        </div>
                     ))
                 }
                  {isAuthenticated().user &&
