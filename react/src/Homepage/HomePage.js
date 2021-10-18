@@ -91,7 +91,7 @@ class HomePage extends Component
                             </li>
                             {isAuthenticated() &&
                             <li class="nav-item"> 
-                                <Link to={`/profile/${isAuthenticated().user._id}/edu/${isAuthenticated().user._id}`} class="nav-link"><button className="btn" style={{backgroundColor: "black",color: "white",padding: "2px"}}><span><i class="fas fa-file-signature"></i></span>My Portfolio</button></Link> 
+                                <Link to={`/profile/${isAuthenticated().user._id}/profilecard/${isAuthenticated().user._id}`} class="nav-link"><button className="btn" style={{backgroundColor: "black",color: "white",padding: "2px"}}><span><i class="fas fa-file-signature"></i></span>My Portfolio</button></Link> 
                             </li>
                             }
                             {isAuthenticated() &&
