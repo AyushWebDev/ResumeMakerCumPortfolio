@@ -1,18 +1,28 @@
 import React from 'react';
-import {isAuthenticated,getEdu,delEdu} from '../user/auth';
+import {isAuthenticated,getEdu,delEdu,addEdu} from '../user/auth';
 import '../user/profile.css'
 import 'antd/dist/antd.css';
 // import './index.css';
-import { Collapse } from 'antd';
-import { CaretRightOutlined ,DeleteOutlined,BookOutlined,CalendarOutlined,BuildOutlined} from '@ant-design/icons';
+import { Collapse ,Modal,message,Popover} from 'antd';
+import { CaretRightOutlined ,DeleteOutlined,BookOutlined,CalendarOutlined,BuildOutlined,PlusCircleOutlined} from '@ant-design/icons';
 const { Panel } = Collapse;
 class Edu extends React.Component{
     constructor(props){
         super(props);
         this.state={
             id: this.props.match.params.id,
-            education: []
+            education: [],
+            title: "",
+            start: "",
+            end: "",
+            institute: "",
+            redirectToReferer: false,
+            error: "",
+            isModalVisible:false 
         }
+    }
+    openModal(){
+        this.setState({isModalVisible:true});
     }
     getEduDetails=async (id)=>{
         const data=await getEdu(id);
@@ -25,6 +35,60 @@ class Edu extends React.Component{
                 education: data.education
             })
         }
+    }
+    handleChange=name=>event=>{
+        this.setState({
+            [name]: event.target.value,
+            error: "" 
+        }); 
+    };
+
+    isValid=()=>{
+       
+    }
+
+    handleSubmit=()=>{        
+        const {title,start,end,institute}=this.state;
+
+        const user={
+            data:[
+            
+                {
+                title: title,
+                year: {
+                    start: start,
+                    end: end
+                },
+                institute: institute
+                }]
+            
+            
+            }
+        
+        
+
+        const edit=async (id)=>{
+            const data=await addEdu(id,user);
+            console.log(data);
+            if(data.error){
+                this.setState({error: data.error});
+            }
+            else{
+                this.setState({
+                    title: "",
+                    start: "",
+                    end: "",
+                    institute: "",
+                    error:"",
+                    redirectToReferer: true
+                });
+           }
+           window.location.reload();
+        }
+        
+        edit(isAuthenticated().user._id);
+
+    
     }
     deleteEdu=async (eid)=>{
         const data=await delEdu(this.state.id,{id: eid});
@@ -41,7 +105,10 @@ class Edu extends React.Component{
     }
     handleDelete=(eid)=>{
         this.deleteEdu(eid);
+        message.warning('Field Deleted from your profile');
     }
+    handleCancel(){this.setState({isModalVisible:false})}
+    handleOk(){this.setState({isModalVisible:false},()=>{this.handleSubmit()})}
     render(){
         return(
             <div>
@@ -71,16 +138,45 @@ class Edu extends React.Component{
                                     </table>
                                 </Panel>
                             </Collapse>
+                            <Modal title="Add Education" visible={this.state.isModalVisible} onOk={()=>this.handleOk()} onCancel={()=>this.handleCancel()} okText='Add'>
+                            {this.state.error && 
+                                 message.error(this.state.error.toUpperCase())
+                            }
+                                <div className="container">
+                                    <div className="row">
+                                    <div className="col-md-4"></div>
+                                    <div className="">
+                                    
+                                    <div className="form-group">
+                                        <label><i className="fa fa-envelope" aria-hidden="true"></i> <b>Title</b></label>
+                                        <input type="text" className="form-control" onChange={this.handleChange("title")} value={this.state.title}></input>
+                                    </div>
+                                    <div className="form-group">
+                                        <label><i className="fa fa-key" aria-hidden="true"></i><b>Start</b></label>
+                                        <input type="number" className="form-control" onChange={this.handleChange("start")} value={this.state.start}></input>
+                                    </div>
+                                    <div className="form-group">
+                                        <label><i className="fa fa-key" aria-hidden="true"></i><b>End</b></label>
+                                        <input type="number" className="form-control" onChange={this.handleChange("end")} value={this.state.end}></input>
+                                    </div>
+                                    <div className="form-group">
+                                        <label><i className="fa fa-key" aria-hidden="true"></i><b>Institute</b></label>
+                                        <input type="text" className="form-control" onChange={this.handleChange("institute")} value={this.state.institute}></input>
+                                    </div>
+                                    </div>
+                               </div>
+                               </div>
+                            </Modal>
                         </div>
                           
                     ))
                 }
-                 
-               
             </div>
              {isAuthenticated().user &&
                 <div className="" style={{marginTop: "20px",textAlign: "center"}}>
-                <button onClick={()=>this.props.history.push(`/editEdu/${this.state.id}`)} className="btn btn-warning" style={{backgroundColor: "#ffcc00"}}><i className="fa fa-plus" aria-hidden="true"></i> Add</button>
+                    <Popover placement="topLeft" content="Add Education">
+                        <PlusCircleOutlined onClick={()=>{this.openModal()}}/>
+                    </Popover>
                 </div>
                 }
                 </div>

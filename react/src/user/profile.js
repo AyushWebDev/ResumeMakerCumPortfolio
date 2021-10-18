@@ -4,7 +4,7 @@ import { getBasics,isAuthenticated,delEdu} from './auth';
 import './profile.css'
 import 'antd/dist/antd.css';
 import { Card ,Grid} from 'antd';
-import { EditOutlined } from '@ant-design/icons';
+import { EditOutlined,UserOutlined } from '@ant-design/icons';
 const gridStyle = {
     width: '75%',
     textAlign: 'center',
@@ -22,6 +22,7 @@ const attributeStyle = {
 const cardstyle={
     width:'fit-content',
 }
+const {Meta}=Card
 class Profile extends React.Component{
     constructor(){
         super();
