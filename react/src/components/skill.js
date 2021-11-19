@@ -1,7 +1,7 @@
 import React from 'react';
 import {isAuthenticated,getSkill,delSkill,addSkill} from '../user/auth';
 import { Collapse,message,Modal,Popover } from 'antd';
-import { CaretRightOutlined ,DeleteOutlined,BookOutlined,CalendarOutlined,BuildOutlined,PlusCircleOutlined} from '@ant-design/icons';
+import { CaretRightOutlined ,DeleteOutlined,BookOutlined,CalendarOutlined,Outlined,PlusCircleOutlined} from '@ant-design/icons';
 const { Panel } = Collapse;
 class Skill extends React.Component{
     constructor(props){
@@ -101,6 +101,7 @@ class Skill extends React.Component{
     render(){
         return(
             <div> 
+                 <p><BookOutlined /> Skills</p>
                 {
                     this.state.skill.map((s,key)=>(
                         <div>

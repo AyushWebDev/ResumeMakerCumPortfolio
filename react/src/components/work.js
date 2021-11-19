@@ -101,7 +101,7 @@ class Work extends React.Component{
     render(){
         return(
             <div> 
-                
+                 <p><BookOutlined /> Works</p>
                 {
                     this.state.work.map((w,key)=>(
                         <div>
