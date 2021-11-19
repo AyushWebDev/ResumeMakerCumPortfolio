@@ -1,7 +1,7 @@
 import React from 'react';
 import {isAuthenticated,getAch,delAch,addAch} from '../user/auth';
 import { Collapse,Modal,Button, message,Popover} from 'antd';
-import { CaretRightOutlined ,DeleteOutlined,BookOutlined,CalendarOutlined,BuildOutlined,PlusCircleOutlined} from '@ant-design/icons';
+import { CaretRightOutlined ,DeleteOutlined,BookOutlined,CalendarOutlined,PlusCircleOutlined} from '@ant-design/icons';
 const { Panel } = Collapse;
 class Achievement extends React.Component{
     constructor(props){
@@ -96,6 +96,7 @@ class Achievement extends React.Component{
     render(){
         return(
             <div> 
+                 <p><BookOutlined /> Achievement</p>
                 {
                     this.state.achievement.map((ach,key)=>(
                         <div>

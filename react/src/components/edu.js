@@ -138,7 +138,7 @@ class Edu extends React.Component{
                                     </table>
                                 </Panel>
                             </Collapse>
-                            <Modal title="Add Education" visible={this.state.isModalVisible} onOk={()=>this.handleOk()} onCancel={()=>this.handleCancel()} okText='Add'>
+                            <Modal title="Add Education" visible={this.state.isModalVisible} onOk={()=>this.handleOk()} onCancel={()=>this.handleCancel()} okText='Add' className='modalStyle'>
                             {this.state.error && 
                                  message.error(this.state.error.toUpperCase())
                             }
