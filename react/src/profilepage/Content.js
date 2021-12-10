@@ -11,6 +11,7 @@ import {
   FileOutlined,
   TeamOutlined,
   UserOutlined,
+  LogoutOutlined
 } from '@ant-design/icons';
 import Achievement  from '../components/achievement';
 import Skill from '../components/skill';
@@ -18,6 +19,7 @@ import Work from '../components/work';
 import Edu from '../components/edu';
 import Profile from '../user/profile';
 import Text from 'antd/lib/typography/Text';
+import { signout } from '../user/auth';
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -105,11 +107,14 @@ class SiderDemo extends React.Component {
             <Menu.Item key="9" icon={<FileOutlined />}>
               Your Resume
             </Menu.Item>
+            <Menu.Item key="10" icon={<LogoutOutlined />}>
+                 <a onClick={()=>signout(()=>{this.props.history.push('/')})}>Sign-out</a> 
+            </Menu.Item>
           </Menu>
         </Sider>
         <Layout className="site-layout" style={{ marginLeft: 200 }}>
           <Header className="site-layout-background" style={{ padding: 0,color:'white' }} >
-                <p>Resume Maker Cum PortFolio</p>
+                <p>Resume Maker Cum PortFolio </p>
           </Header>
           <Content      
             style={{margin: '24px 16px 0', overflow: 'initial' ,minHeight:'78vh'}}

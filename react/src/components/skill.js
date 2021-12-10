@@ -119,7 +119,10 @@ class Skill extends React.Component{
                                  </div>
                                 </Panel>
                             </Collapse>
-                            <Modal title="Add Skill" visible={this.state.isModalVisible} onOk={()=>this.handleOk()} onCancel={()=>this.handleCancel()} okText='Add'>
+                        </div>
+                    ))
+                }
+                <Modal title="Add Skill" visible={this.state.isModalVisible} onOk={()=>this.handleOk()} onCancel={()=>this.handleCancel()} okText='Add'>
                             {this.state.error && 
                                  message.error(this.state.error.toUpperCase())
                             }
@@ -140,10 +143,6 @@ class Skill extends React.Component{
                                </div>
                                </div>
                             </Modal>
-                        </div>
-                    ))
-                }
-                
                  {isAuthenticated().user &&
                 <div className="" style={{marginTop: "20px",textAlign: "center"}}>
                     <Popover placement="topLeft" content="Add Skill">

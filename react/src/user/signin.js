@@ -91,7 +91,7 @@ class Signin extends React.Component{
     render(){
         if(this.state.redirectToReferer)
         {
-            return <Redirect to={`/profile/${isAuthenticated().user._id}`}/>
+            return <Redirect to={`/profile/${isAuthenticated().user._id}/profilecard/${isAuthenticated().user._id}`}/>
         }
         return(
             <div className="sign">

@@ -112,7 +112,10 @@ class Achievement extends React.Component{
                                     <p>{ach.description}</p>
                                 </Panel>
                             </Collapse>
-                            <Modal title="Add Achievement" visible={this.state.isModalVisible} onOk={()=>this.handleOk()} onCancel={()=>this.handleCancel()} okText='Add'>
+                        </div>
+                    ))
+                }
+                 <Modal title="Add Achievement" visible={this.state.isModalVisible} onOk={()=>this.handleOk()} onCancel={()=>this.handleCancel()} okText='Add'>
                                     {this.state.error && 
                                         message.error(this.state.error.toUpperCase())
                                     }
@@ -133,9 +136,6 @@ class Achievement extends React.Component{
                                 </div>
                                 </div>
                             </Modal>
-                        </div>
-                    ))
-                }
                  {isAuthenticated().user &&
                 <div className="" style={{marginTop: "20px",textAlign: "center"}}>
                     <Popover placement="topLeft" content="Add Achievement">
