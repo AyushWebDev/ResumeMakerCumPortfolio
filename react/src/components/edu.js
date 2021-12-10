@@ -18,11 +18,11 @@ class Edu extends React.Component{
             institute: "",
             redirectToReferer: false,
             error: "",
-            isModalVisible:false 
+            isModalVisible:false
         }
     }
     openModal(){
-        this.setState({isModalVisible:true});
+        this.setState({isModalVisible:true},console.log('Modal opened',this.state.isModalVisible));
     }
     getEduDetails=async (id)=>{
         const data=await getEdu(id);
@@ -138,7 +138,10 @@ class Edu extends React.Component{
                                     </table>
                                 </Panel>
                             </Collapse>
-                            <Modal title="Add Education" visible={this.state.isModalVisible} onOk={()=>this.handleOk()} onCancel={()=>this.handleCancel()} okText='Add' className='modalStyle'>
+                        </div>    
+                    ))
+                }
+                <Modal title="Add Education" visible={this.state.isModalVisible} onOk={()=>this.handleOk()} onCancel={()=>this.handleCancel()} okText='Add' className='modalStyle'>
                             {this.state.error && 
                                  message.error(this.state.error.toUpperCase())
                             }
@@ -167,10 +170,6 @@ class Edu extends React.Component{
                                </div>
                                </div>
                             </Modal>
-                        </div>
-                          
-                    ))
-                }
             </div>
              {isAuthenticated().user &&
                 <div className="" style={{marginTop: "20px",textAlign: "center"}}>

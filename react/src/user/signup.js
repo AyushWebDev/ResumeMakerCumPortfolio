@@ -139,6 +139,7 @@ class Signup extends React.Component{
                     phone:"",
                     error:""
                 });
+                message.success('You are registered. Sign in to continue..');
             }
         }
         register(user);
