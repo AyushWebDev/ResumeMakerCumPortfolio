@@ -131,11 +131,11 @@ class HomePage extends Component
                                         <p class="text-like-h3 text-bold" style={{marginTop:'175px'}} >/ Pick one from our Resume Templates</p>
                                         <div className="center-text">
                                             <p><i class="fas fa-quote-left"></i>The online resume builder getting folks hired by Amazon, Google, Apple, Microsoft, and Netflix.<i class="fas fa-quote-right"></i></p>
-                                            <Card title="For Employee" style={cardstyle} extra={<Button style={buttonstyle} >Enter Portal</Button>}>
+                                            <Card title="For Employee" style={cardstyle} extra={<Link to='/signin' ><Button style={buttonstyle}>Enter Portal</Button></Link>}>
                                                Build your brand new resume in as little as in 5 minutes.
                                         </Card>
                                                 <br />
-                                        <Card title="For Employer" style={cardstyle} extra={<Button style={buttonstyle}>Enter Portal</Button>}>
+                                        <Card title="For Employer" style={cardstyle} extra={<Link to='/admin-signin' ><Button style={buttonstyle}>Enter Portal</Button></Link>}>
                                                 Hire the best talent whose profile meets job requirement.
                                         </Card> 
                                         </div>
