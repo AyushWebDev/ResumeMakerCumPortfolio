@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import 'antd/dist/antd.css';
 import './styles.css';
 import { Collapse } from 'antd';
-import { CaretRightOutlined,DeleteOutlined } from '@ant-design/icons';
+import { CaretRightOutlined,DeleteOutlined,CheckCircleOutlined,CloseCircleOutlined } from '@ant-design/icons';
 import { Form } from 'antd'
 import FormBuilder from 'antd-form-builder'
 const { Panel } = Collapse;
@@ -37,7 +37,13 @@ class ManageOpening extends Component {
                 expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
                 className="site-collapse-custom-collapse"
             >
-                <Panel header="This is panel header 1" key="1" className="site-collapse-custom-panel" extra={<DeleteOutlined onClick={()=>{}}/>}>
+                <Panel header="This is panel header 1" key="1" className="site-collapse-custom-panel" extra={
+                    <div>
+                        <span style={{paddingRight:'10px'}}>
+                        <CheckCircleOutlined /></span>
+                        <CloseCircleOutlined />
+                    </div>
+                }>
                 <FormBuilder meta={meta} initialValues={personalInfo} viewMode />
                 </Panel>
                 <Panel header="This is panel header 2" key="2" className="site-collapse-custom-panel">

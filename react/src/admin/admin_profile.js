@@ -13,6 +13,7 @@ import {
 import Text from 'antd/lib/typography/Text';
 import ManageOpenening from './adminComponents/manageopening';
 import CreateJob from './adminComponents/createjob';
+import JobApplicants from './adminComponents/jobApplicants'
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 class AdminProfile extends Component {
@@ -70,13 +71,13 @@ class AdminProfile extends Component {
           <div className="logo" />
           <Menu theme="dark"  mode="inline" style={{fontSize:'17px',marginTop:'30%'}}>
             <Menu.Item key="profile" icon={<PieChartOutlined />}>
-            <Link to={`/admin-profile/${isAuthenticated().emp._id}/manage/${isAuthenticated().emp._id}`}>Manage Openings</Link>
+            <Link to={`/admin-profile/${isAuthenticated().emp._id}/manage/${isAuthenticated().emp._id}`} as="/manageJobs">Manage Openings</Link>
             </Menu.Item>
             <Menu.Item key="2" icon={<UsergroupAddOutlined />}>
             <Link to={`/admin-profile/${isAuthenticated().emp._id}/create-job/${isAuthenticated().emp._id}`}>Create Job </Link>
             </Menu.Item>
             <Menu.Item key="3" icon={<ProfileOutlined />}>
-            Job Applications 
+            <Link to={`/admin-profile/${isAuthenticated().emp._id}/job-applicants/${isAuthenticated().emp._id}`}>Job Applications</Link> 
             </Menu.Item>
             <Menu.Item key="4" icon={<LogoutOutlined />}>
                  <a onClick={()=>signout(()=>{this.props.history.push('/')})}>Sign-out</a> 
@@ -104,6 +105,7 @@ class AdminProfile extends Component {
               <Switch>
                <Route exact path ='/admin-profile/:empid/manage/:empid' component={ManageOpenening}></Route>
                <Route exact path ='/admin-profile/:empid/create-job/:empid' component={CreateJob}></Route>
+               <Route exact path ='/admin-profile/:empid/job-applicants/:empid' component={JobApplicants}></Route>
             </Switch>
             </Col>
             </div>
