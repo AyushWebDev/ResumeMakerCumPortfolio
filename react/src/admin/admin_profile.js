@@ -12,6 +12,7 @@ import {
 } from '@ant-design/icons';
 import Text from 'antd/lib/typography/Text';
 import ManageOpenening from './adminComponents/manageopening';
+import CreateJob from './adminComponents/createjob';
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 class AdminProfile extends Component {
@@ -72,7 +73,7 @@ class AdminProfile extends Component {
             <Link to={`/admin-profile/${isAuthenticated().emp._id}/manage/${isAuthenticated().emp._id}`}>Manage Openings</Link>
             </Menu.Item>
             <Menu.Item key="2" icon={<UsergroupAddOutlined />}>
-            Create Job 
+            <Link to={`/admin-profile/${isAuthenticated().emp._id}/create-job/${isAuthenticated().emp._id}`}>Create Job </Link>
             </Menu.Item>
             <Menu.Item key="3" icon={<ProfileOutlined />}>
             Job Applications 
@@ -87,26 +88,22 @@ class AdminProfile extends Component {
                 <p>Resume Maker Cum PortFolio </p>
           </Header>
           <Content      
-            style={{margin: '24px 16px 0', overflow: 'initial' ,minHeight:'78vh'}}
+            style={{margin: '24px', overflow: 'initial' ,minHeight:'78vh'}}
           >
-            <Breadcrumb style={{ margin: '16px 0',fontSize:'15px'}}>
+            <Breadcrumb style={{ margin: '8px 0px',fontSize:'15px'}}>
               <Breadcrumb.Item><Text style={{
                 color:'black',
                 fontSize:'25px'
               }}>{this.state.firstname} / Profile</Text></Breadcrumb.Item>
             </Breadcrumb>
-            <div style={{ paddingTop: 36, paddingLeft:"200px"}}>
-              {this.state.firstname+' '+this.state.lastname}
+            <div style={{ paddingLeft:"200px"}}>
               <Col span={18}
               style={{
                 overflowY:'scroll' 
               }}>
               <Switch>
                <Route exact path ='/admin-profile/:empid/manage/:empid' component={ManageOpenening}></Route>
-               {/* <Route exact path='/profile/:userid/edu/:id' component={Edu}></Route>
-               <Route exact path='/profile/:userid/work/:id' component={Work}></Route>
-               <Route exact path='/profile/:userid/skill/:id' component={Skill}></Route>
-               <Route exact path='/profile/:userid/achievement/:id' component={Achievement}></Route>                          */}
+               <Route exact path ='/admin-profile/:empid/create-job/:empid' component={CreateJob}></Route>
             </Switch>
             </Col>
             </div>
