@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {isAuthenticated, signin} from "./auth";
 import {Link,Redirect, Router} from 'react-router-dom';
 import Footer from 'rc-footer';
 import { message,Button } from 'antd';
@@ -8,7 +9,7 @@ class AdminSignIn extends Component {
     constructor(){
         super();
         this.state={
-            password: "",
+            password: "", 
             email: "",
             error: "",
             redirectToReferer: false,
@@ -55,15 +56,40 @@ class AdminSignIn extends Component {
         
         return true;
     }
-      // handleSubmit=event=>{
-    //     To be completed by Ayush
-    // }
-    render() {
+      handleSubmit=event=>{
+        event.preventDefault();
+        if(this.isValid()){
+        const {email,password}=this.state;
+
+        const emp={
+            email,
+            password
+        }
+
+        const login=async (emp)=>{
+            const data=await signin(emp);
+            console.log(data);
+            if(data.error){
+                this.setState({error: data.error});
+            }
+            else{
+                if(typeof window !== "undefined"){
+                    localStorage.setItem("jwt",JSON.stringify(data));//storing token(userinfo) in local storage
+                    this.setState({
+                        redirectToReferer: true
+                    });
+                }
+            }
+        }
+        login(emp);
+    } 
+    }
+    render() { 
         // Uncomment once redirect to refer is changed in hanldeSubmit
-        // if(this.state.redirectToReferer)
-        // {
-        //     return <Redirect to={`/profile/${isAuthenticated().user._id}`}/>
-        // }
+        if(this.state.redirectToReferer)
+        {
+            return <Redirect to={`/admin-profile/${isAuthenticated().emp._id}`}/>
+        }
         return (
             <div className="sign">
                 <Modal title='' visible={this.state.isModalVisible} 
@@ -101,7 +127,7 @@ class AdminSignIn extends Component {
                                 <h1>Sign In Now!<span>Sign in and build your profile more interactive!</span></h1>
                                 <div className="section"><span>1</span>E-mail</div>
                                 <div className="inner-wrap">
-                                    <label>Your Full Name <input type="email" name="field1" onChange={this.handleChange("email")} value={this.state.email} /></label>
+                                    <label>Organization Email <input type="email" name="field1" onChange={this.handleChange("email")} value={this.state.email} /></label>
                                 </div>
                                 <div className="section"><span>2</span>Password</div>
                                 <div className="inner-wrap">

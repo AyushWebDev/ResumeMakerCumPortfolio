@@ -114,7 +114,7 @@ class Signin extends React.Component{
                                 <h1>Sign In Now!<span>Sign in and build your profile more interactive!</span></h1>
                                 <div className="section"><span>1</span>E-mail</div>
                                 <div className="inner-wrap">
-                                    <label>Your Full Name <input type="email" name="field1" onChange={this.handleChange("email")} value={this.state.email} /></label>
+                                    <label>Your Email <input type="email" name="field1" onChange={this.handleChange("email")} value={this.state.email} /></label>
                                 </div>
                                 <div className="section"><span>2</span>Password</div>
                                 <div className="inner-wrap">
