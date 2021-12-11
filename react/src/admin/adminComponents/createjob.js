@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { message } from 'antd';
+import {addJob,isAuthenticated} from '../auth'
 class CreateJob extends Component {
     constructor(){
         super();
@@ -9,12 +10,11 @@ class CreateJob extends Component {
             description:'',
             location:'',
             openings:0,
-            eligibility:{
-                experience:0,
-                education:'',
-                description:''
-            },
+            experience:0, 
+            education:'',
+            desc:'',
             error: "",
+            org: isAuthenticated().emp._id,
             redirectToReferer: false,
             isModalVisible:false
         }
@@ -23,8 +23,50 @@ class CreateJob extends Component {
         this.setState({
             [name]: event.target.value,
             error: "" 
-        }); 
+        });  
     };
+    handleSubmit=event=>{
+        event.preventDefault();
+        // if(this.isValid()){
+        const {title,description,org,location,openings,experience,education,desc}=this.state;
+        console.log("check");
+        const job={
+            title,
+            description,
+            org,
+            location,
+            openings,
+            eligibility:{
+            exp: experience,
+            edu: education,
+            description: desc
+            }
+        }
+        console.log("check");
+        const postJob=async (job)=>{
+            const data=await addJob(job);
+            console.log(data);
+            if(data.error){
+                this.setState({error: data.error});
+            }
+            else{
+                this.setState({
+                    title: "",
+                    description: "",
+                    location: "",
+                    desc: "", 
+                    openings: 0,
+                    experience: 0,
+                    education: "",
+                    error: ""
+                });
+                message.success('Job posted successfully');
+            }
+        }
+        postJob(job);
+        console.log("check");
+    
+    }
     render() {
         return (
             <div style={{maxHeight:'400px'}}>
@@ -44,17 +86,17 @@ class CreateJob extends Component {
                                 <label>No of Openings <input type="number" name="field3" onChange={this.handleChange("openings")} value={this.state.openings} /></label>
                             </div>
                             <div className="inner-wrap">
-                                <label>Job Description <textarea name="field4" rows='5' onChange={this.handleChange("description")} value={this.state.desc} /></label>
+                                <label>Job Description <textarea name="field4" rows='5' onChange={this.handleChange("description")} value={this.state.description} /></label>
                             </div>
                             <div className="section"><span>2</span>Eligibility</div>
                                 <div className="inner-wrap">
-                                    <label>Experience<input type="number" name="field5" onChange={this.handleChange("password")} value={this.state.password} /></label>
+                                    <label>Experience<input type="number" name="field5" onChange={this.handleChange("experience")} value={this.state.experience} /></label>
                                 </div>
                                 <div className="inner-wrap">
-                                    <label>Education<input type="text" name="field6" onChange={this.handleChange("password")} value={this.state.password} /></label>
+                                    <label>Education<input type="text" name="field6" onChange={this.handleChange("education")} value={this.state.education} /></label>
                                 </div>
                                 <div className="inner-wrap">
-                                    <label>Description<textarea rows='4'name="field7" onChange={this.handleChange("password")} value={this.state.password} /></label>
+                                    <label>Description<textarea rows='4'name="field7" onChange={this.handleChange("desc")} value={this.state.desc} /></label>
                                 </div>
                             <div className="button-section">
                                 <input type="submit" name="Create" />

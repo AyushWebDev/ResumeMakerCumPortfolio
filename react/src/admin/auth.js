@@ -75,9 +75,9 @@ export const getBasics=async (id)=>{
     }
 }
 
-export const addJob=async (orgid,data)=>{
+export const addJob=async (data)=>{
     try{
-        const response=await fetch(`http://localhost:8000/job/postJob/${orgid}`,{ 
+        const response=await fetch(`http://localhost:8000/job/postJob`,{ 
             method: "POST", 
             headers: {
                 Accept: "application/json",
