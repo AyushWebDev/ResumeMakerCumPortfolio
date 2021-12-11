@@ -74,3 +74,35 @@ export const getBasics=async (id)=>{
         console.log(e);
     }
 }
+
+export const addJob=async (orgid,data)=>{
+    try{
+        const response=await fetch(`http://localhost:8000/job/postJob/${orgid}`,{ 
+            method: "POST", 
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json" 
+            },
+            body: JSON.stringify(data)
+        });
+        return response.json();
+    }catch(e){
+        console.log(e);
+    }
+}
+
+export const getJob=async (orgid)=>{
+    try{
+        const response=await fetch(`http://localhost:8000/job/getOrgJob/${orgid}`,{ 
+            method: "GET", 
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json" 
+            }
+        });
+        return response.json();
+    }catch(e){
+        console.log(e);
+    }
+}
+
