@@ -1,23 +1,25 @@
-import React from 'react';
-import './signup.css';
-import {isAuthenticated, signin} from "./auth";
-import {Link,Redirect} from 'react-router-dom';
+import React, { Component } from 'react';
+import {Link,Redirect, Router} from 'react-router-dom';
 import Footer from 'rc-footer';
-import { message } from 'antd';
-import Login from '../image/Register.jpg'
-const errorStyle={
-    textAlign: "center"
-}
-class Signin extends React.Component{
+import { message,Button } from 'antd';
+import Modal from 'antd/lib/modal/Modal';
+
+class AdminSignIn extends Component {
     constructor(){
         super();
         this.state={
             password: "",
             email: "",
             error: "",
-            redirectToReferer: false
+            redirectToReferer: false,
+            isModalVisible:false
         }
     }
+    componentDidMount() {
+        this.setState({isModalVisible:true});
+    }
+    
+    
     handleChange=name=>event=>{
         this.setState({
             [name]: event.target.value,
@@ -53,48 +55,29 @@ class Signin extends React.Component{
         
         return true;
     }
-
-    handleSubmit=event=>{
-        event.preventDefault();
-        if(this.isValid()){
-        const {firstname,lastname,password,email,address,phone,linkedin}=this.state;
-
-        const user={
-            firstname,
-            lastname,
-            password,
-            email,
-            contacts:{address,
-            phone,
-            linkedin}
-        }
-
-        const login=async (user)=>{
-            const data=await signin(user);
-            console.log(data);
-            if(data.error){
-                this.setState({error: data.error});
-            }
-            else{
-                if(typeof window !== "undefined"){
-                    localStorage.setItem("jwt",JSON.stringify(data));//storing token(userinfo) in local storage
-                    this.setState({
-                        redirectToReferer: true
-                    });
-                }
-            }
-        }
-        login(user);
-    }
-    }
-
-    render(){
-        if(this.state.redirectToReferer)
-        {
-            return <Redirect to={`/profile/${isAuthenticated().user._id}/profilecard/${isAuthenticated().user._id}`}/>
-        }
-        return(
+    render() {
+        // if(this.state.redirectToReferer)
+        // {
+        //     return <Redirect to={`/profile/${isAuthenticated().user._id}`}/>
+        // }
+        return (
             <div className="sign">
+                <Modal title='' visible={this.state.isModalVisible} 
+                onCancel={()=>{this.setState({isModalVisible:false})}}
+                footer={[
+                    <Link to='/'>
+                    <Button key="back" style={{float:'left'}}>
+                      Return to Homepage
+                    </Button>
+                    </Link>,
+                    <Button key="submit" type="primary"  onClick={()=>{this.setState({isModalVisible:false})}}>
+                      Continue
+                    </Button>
+                ]}
+                >
+                    <h3 style={{color:'red'}}>You are logging in as Employer</h3>
+                    <h4 style={{color:'green'}}>Continue to hire best talent in simplest possible way!</h4>
+                </Modal>
                 <div className="container cont">
                     <div className="row">
                         {/* <div className="col-md-4"  style={{padding:'0px'}}>
@@ -103,7 +86,7 @@ class Signin extends React.Component{
                         <div className="col-md-12">
                             <div className="navigate">
                                 <ul className="pagination">
-                                    <li className="page-item"><Link to='/signup' className='page-link'><h5>Register</h5></Link></li>
+                                    <li className="page-item"><Link to='/admin-signup' className='page-link'><h5>Register</h5></Link></li>
                                     <li className="page-item active"><Link to='#' className='page-link'><h5>Login</h5></Link></li>
                                 </ul>   
                             </div>
@@ -163,8 +146,8 @@ class Signin extends React.Component{
                     bottom="Made with ❤️ by Ayush, Harsh and Shubham"
                 />
             </div>
-        )
+        );
     }
 }
 
-export default Signin;
+export default AdminSignIn;

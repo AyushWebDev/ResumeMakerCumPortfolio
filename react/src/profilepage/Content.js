@@ -4,19 +4,22 @@ import 'antd/dist/antd.css';
 import './Content.css';
 import { getBasics,isAuthenticated,delEdu} from '../user/auth';
 import {BrowserRouter,Switch,Route,Link} from 'react-router-dom';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu, Breadcrumb,Row,Col } from 'antd';
 import {
   DesktopOutlined,
   PieChartOutlined,
   FileOutlined,
   TeamOutlined,
   UserOutlined,
+  LogoutOutlined
 } from '@ant-design/icons';
 import Achievement  from '../components/achievement';
 import Skill from '../components/skill';
 import Work from '../components/work';
 import Edu from '../components/edu';
 import Profile from '../user/profile';
+import Text from 'antd/lib/typography/Text';
+import { signout } from '../user/auth';
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -67,8 +70,14 @@ class SiderDemo extends React.Component {
   render() {
     const { collapsed } = this.state;
     return (
-      <Layout style={{ minHeight: '100vh',fontSize:'20px' }}>
-        <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse} defaultSelectedKeys={['Profile']}>
+      <Layout style={{fontSize:'20px'}}>
+        <Sider defaultSelectedKeys={['Profile']}
+         style={{
+          overflow: 'auto',
+          height: '100vh',
+          position: 'fixed',
+          left: 0,
+         }}>
           <div className="logo" />
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" style={{fontSize:'17px',marginTop:'30%'}}>
             <Menu.Item key="profile" icon={<PieChartOutlined />}>
@@ -98,19 +107,30 @@ class SiderDemo extends React.Component {
             <Menu.Item key="9" icon={<FileOutlined />}>
             <Link to={`/resume/2`}> Your Resume </Link>
             </Menu.Item>
+            <Menu.Item key="10" icon={<LogoutOutlined />}>
+                 <a onClick={()=>signout(()=>{this.props.history.push('/')})}>Sign-out</a> 
+            </Menu.Item>
           </Menu>
         </Sider>
-        <Layout className="site-layout">
+        <Layout className="site-layout" style={{ marginLeft: 200 }}>
           <Header className="site-layout-background" style={{ padding: 0,color:'white' }} >
-                <p>Resume Maker Cum PortFolio</p>
+                <p>Resume Maker Cum PortFolio </p>
           </Header>
-          <Content style={{ margin: '0 16px' ,overflowY:'auto !important'}}>
+          <Content      
+            style={{margin: '24px 16px 0', overflow: 'initial' ,minHeight:'78vh'}}
+          >
             <Breadcrumb style={{ margin: '16px 0',fontSize:'15px'}}>
-              <Breadcrumb.Item>{this.state.firstname}</Breadcrumb.Item>
-              <Breadcrumb.Item>Profile</Breadcrumb.Item>
+              <Breadcrumb.Item><Text style={{
+                color:'black',
+                fontSize:'25px'
+              }}>{this.state.firstname} / Profile</Text></Breadcrumb.Item>
             </Breadcrumb>
-            <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
+            <div style={{ paddingTop: 36, paddingLeft:"200px"}}>
               {/* {this.state.firstname+' '+this.state.lastname} */}
+              <Col span={18}
+              style={{
+                overflowY:'scroll' 
+              }}>
               <Switch>
                <Route exact path ='/profile/:userid/profilecard/:id' component={Profile}></Route>
                <Route exact path='/profile/:userid/edu/:id' component={Edu}></Route>
@@ -118,6 +138,7 @@ class SiderDemo extends React.Component {
                <Route exact path='/profile/:userid/skill/:id' component={Skill}></Route>
                <Route exact path='/profile/:userid/achievement/:id' component={Achievement}></Route>                         
             </Switch>
+            </Col>
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Made with ❤️ by Ayush, Harsh and Shubham ©2021 </Footer>
