@@ -53,7 +53,22 @@
     }
  }
 
- 
+ export const signout=(next)=>{
+    if(typeof window !== "undefined")
+        localStorage.removeItem("jwt");
+    next();
+    return (
+        fetch(`http://localhost:8000/user/signout`,{
+            method: "GET"
+        })
+        .then(response=>{
+            response.json();
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+    ); 
+};
 
 export const getBasics=async (id)=>{
     try{
@@ -286,22 +301,7 @@ export const isAuthenticated=()=>{
     return false;
 };
 
-export const signout=(next)=>{
-    if(typeof window !== "undefined")
-        localStorage.removeItem("jwt");
-    next();
-    return (
-        fetch(`http://localhost:8000/user/signout`,{
-            method: "GET"
-        })
-        .then(response=>{
-            response.json();
-        })
-        .catch(error=>{
-            console.log(error);
-        })
-    ); 
-};
+
 
 //export default signup;
 

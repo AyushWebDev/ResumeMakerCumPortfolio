@@ -1,7 +1,7 @@
 const mongoose=require('mongoose');
 const crypto=require("crypto");
 
-const userSchema=new mongoose.Schema({ 
+const employerSchema=new mongoose.Schema({
     firstname: {
         type: String,
         required: [true,"name not provided"]
@@ -13,47 +13,14 @@ const userSchema=new mongoose.Schema({
         required: true
     },
     email: String,
-    contacts:{
-        address: String,
-        linkedin: String,
-        phone: Number
+    orgname: {
+        type: String,
+        required: [true,"name not provided"]
     },
-    education: [
-        {
-            title: String,
-            year: {
-                start: Number,
-                end: Number
-            },
-            institute: String
-        }
-    ],
-    work: [
-        {
-            title: String,
-            year: {
-                start: Number,
-                end: Number
-            },
-            description: String
-        }
-    ],
-    achievements: [
-        {
-            title: String,
-            description: String
-        }
-    ],
-    skills: [
-        {
-            title: String,
-            rate: Number
-        }
-    ],
-    about: String
+    address: String
 }) 
 
-userSchema.virtual("password")
+employerSchema.virtual("password")
 .set(function(password){
     //create temp var _password
     this._password=password;//password=the password given by user
@@ -66,7 +33,7 @@ userSchema.virtual("password")
 })
 
 //method
-userSchema.methods={
+employerSchema.methods={
     encryptPassword: function(password){
         if(!password)
             return "";
@@ -87,4 +54,4 @@ userSchema.methods={
     
 }
 
-module.exports=mongoose.model("User",userSchema);
+module.exports=mongoose.model("Employer",employerSchema);

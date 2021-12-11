@@ -186,7 +186,7 @@ class Signup extends React.Component{
                                 <div class="section"><span>4</span>LinkedIn</div>
                                     <div class="inner-wrap">
                                     <label>LinkedIn Address <input type="url" name="field5" onChange={this.handleChange("linkedin")} value={this.state.linkedin} /></label>
-                                </div>
+                                </div> 
                                 <div class="button-section">
                                 <input type="submit" name="Sign Up" />
                                     <span class="privacy-policy">

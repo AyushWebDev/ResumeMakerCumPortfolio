@@ -16,12 +16,14 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(cookieParser());
 
+const empRouter=require("./routes/employer");
 const userRouter=require("./routes/user");
 const eduRouter=require("./routes/edu");
 const workRouter=require("./routes/work");
 const achievementRouter=require("./routes/achievements");
 const skillRouter=require("./routes/skills");
 
+app.use("/emp",empRouter);
 app.use("/user",userRouter);
 app.use("/edu",eduRouter);
 app.use("/work",workRouter);

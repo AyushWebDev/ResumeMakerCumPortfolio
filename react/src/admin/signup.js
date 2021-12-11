@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 // import {signup} from "./auth";
+import {signup} from "./auth";
 import {Link} from 'react-router-dom';
 import Footer from 'rc-footer';
 import { message } from 'antd';
@@ -14,7 +15,7 @@ class AdminSignUp extends Component {
             firstname: "",
             lastname: "",
             password: "",
-            org_email: "",
+            org_email: "", 
             org_name:'',
             address: "",
             error: ""
@@ -85,9 +86,44 @@ class AdminSignUp extends Component {
 
         return true;
     }
-    // handleSubmit=event=>{
-    //     To be completed by Ayush
-    // }
+    handleSubmit=event=>{
+        event.preventDefault();
+        if(this.isValid()){
+        const {firstname,lastname,password,org_email,org_name,address}=this.state;
+        
+
+        const emp={
+            firstname,
+            lastname,
+            password,
+            email: org_email,
+            orgname: org_name,
+            address
+        }
+
+        const register=async (emp)=>{
+            const data=await signup(emp);
+            console.log(data);
+            if(data.error){
+                this.setState({error: data.error});
+            }
+            else{
+                this.setState({
+                    firstname: "",
+                    lastname: "",
+                    password: "",
+                    org_email: "", 
+                    org_name:'',
+                    address: "",
+                    error: ""
+                });
+                message.success('You are registered. Sign in to continue..');
+            }
+        }
+        register(emp);
+    }
+     
+    }
     render() {
         return (
             <div className="sign">
@@ -170,6 +206,6 @@ class AdminSignUp extends Component {
         </div>
         );
     }
-}
 
+}
 export default AdminSignUp;
