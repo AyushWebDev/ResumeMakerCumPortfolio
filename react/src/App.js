@@ -9,6 +9,7 @@ import Prototype1 from './Resume/Prototype1';
 import Content from './profilepage/Content';
 import AdminSignIn from './admin/signin';
 import AdminSignUp from './admin/signup';
+import AdminProfile from './admin/admin_profile';
 class App extends React.Component{
   
 
@@ -22,6 +23,7 @@ class App extends React.Component{
                 <Route exact path="/" component={HomePage}></Route>
                 <Route exact path='/admin-signin' component={AdminSignIn}></Route>
                 <Route exact path='/admin-signup' component={AdminSignUp}></Route>
+                <Route exact path='/admin-profile' component={AdminProfile}></Route>
                 <Route exact path="/signup" component={SignUp}></Route>
                 <Route exact path="/signin" component={SignIn}></Route>
                 <Route exact path="/resume/1" component={Prototype1}></Route>
