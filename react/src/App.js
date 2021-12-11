@@ -23,7 +23,7 @@ class App extends React.Component{
                 <Route exact path="/" component={HomePage}></Route>
                 <Route exact path='/admin-signin' component={AdminSignIn}></Route>
                 <Route exact path='/admin-signup' component={AdminSignUp}></Route>
-                <Route exact path='/admin-profile/:empid' component={AdminProfile}></Route>
+                <Route path='/admin-profile/:empid' component={AdminProfile}></Route>
                 <Route exact path="/signup" component={SignUp}></Route>
                 <Route exact path="/signin" component={SignIn}></Route>
                 <Route exact path="/resume/1" component={Prototype1}></Route>
