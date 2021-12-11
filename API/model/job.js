@@ -13,7 +13,13 @@ const jobSchema=mongoose.Schema({
         exp: Number,
         edu: String,
         description: String
-    }
+    },
+    applicants: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        }
+    ]
 })
 
 module.exports=mongoose.model("Job",jobSchema);
