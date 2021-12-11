@@ -5,6 +5,7 @@ import { Collapse } from 'antd';
 import { CaretRightOutlined,DeleteOutlined } from '@ant-design/icons';
 import { Form } from 'antd'
 import FormBuilder from 'antd-form-builder'
+import { getJob } from '../auth';
 const { Panel } = Collapse;
 const text='Hi harsh this is collapse';
 const personalInfo = {
@@ -29,6 +30,43 @@ const personalInfo = {
     ],
   }
 class ManageOpening extends Component {
+    constructor()
+    {
+        super();
+        this.state={
+            id: "",
+            firstname: '',
+            lastname: '',
+            org_email: '',
+            address: '',
+            org_title:'',
+            error: "",
+            collapsed:false
+        }
+    }
+    componentDidMount() {
+        const getJobDetails=async (id)=>{
+            console.log('Fuction Called')
+            const data=await getJob(id);
+            console.log(data);
+            if(data.error){
+                console.log(data.error);
+            }
+            // else{
+            //     this.setState({
+            //         firstname: data.firstname,
+            //         lastname: data.lastname,
+            //         org_email: data.email,
+            //         address: data.address,
+            //         org_name:data.orgname,
+            //         error: ""
+            //     },console.log(this.state));
+            // }
+        }
+        const id=this.props.match.params.empid;
+        getJobDetails(id);
+    }
+    
     render() {
         return (
             <div>
