@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 const jwt=require("jsonwebtoken");
 const auth=require("../controller/auth");
 //const expressJwt=require("express-jwt");
-
+ 
 dotenv.config();
 
 
@@ -33,7 +33,7 @@ router.post("/signin",async (req,res)=>{
         {
             return res.status(401).json({
                 error: "user with that email doesn't exist.Please try again"
-            });
+            }); 
         }
         //if found, authenticate
         //create authenticate method in user model and use
@@ -60,6 +60,24 @@ router.get("/signout",(req,res)=>{
     return res.json({
         msg: "signout success"
     });
+})
+
+router.get("/getBasics/:id",async (req,res)=>{
+    try{
+        const id=req.params.id;
+        const empInfo=await Employer.findById({_id: id})
+        if(!empInfo){
+            res.status(404).json({
+                error: "Data not found"
+            })
+        }
+        else{
+            res.status(200).json(empInfo);
+        }
+    }catch(e){
+        res.json({error: e})
+        console.log(e);
+    }
 })
 
 module.exports=router;

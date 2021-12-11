@@ -21,7 +21,7 @@ class Prototype2 extends Component{
         else{
             this.setState({
                 user: data
-            })
+            }) 
         }
     }
     componentDidMount(){
