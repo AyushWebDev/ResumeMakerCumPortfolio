@@ -59,3 +59,18 @@ export const isAuthenticated=()=>{
     }
     return false;
 };
+
+export const getBasics=async (id)=>{
+    try{
+        const response=await fetch(`http://localhost:8000/emp/getBasics/${id}`,{ 
+            method: "GET", 
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json" 
+            }
+        });
+        return response.json();
+    }catch(e){
+        console.log(e);
+    }
+}
