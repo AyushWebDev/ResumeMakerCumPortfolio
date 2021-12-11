@@ -8,6 +8,7 @@
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
     "antd": "^4.16.13",
+    "antd-form-builder": "^2.1.4",
     "aos": "^2.3.4",
     "rc-footer": "^0.6.6",
     "rc-queue-anim": "^2.0.0",
