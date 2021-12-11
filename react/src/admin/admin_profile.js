@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
-import { signout } from '../user/auth';
-import { isAuthenticated} from '../admin/auth';
+import { getBasics,signout,isAuthenticated} from '../admin/auth';
 import {BrowserRouter,Switch,Route,Link} from 'react-router-dom';
 import { Layout, Menu, Breadcrumb,Row,Col } from 'antd';
 import {
@@ -36,25 +35,25 @@ class AdminProfile extends Component {
     this.setState({ collapsed });
   };
   componentDidMount(){
-        // const getBasicsDetails=async (id)=>{
-        //     const data=await getBasics(id);
-        //     console.log(data);
-        //     if(data.error){
-        //         console.log(data.error);
-        //     }
-        //     else{
-        //         this.setState({
-        //             firstname: data.firstname,
-        //             lastname: data.lastname,
-        //             org_email: data.email,
-        //             address: data.address,
-        //             org_name:data.orgname,
-        //             error: ""
-        //         },console.log(this.state));
-        //     }
-        // }
-        // const id=this.props.match.params.empid;
-        // getBasicsDetails(id);
+        const getBasicsDetails=async (id)=>{
+            const data=await getBasics(id);
+            console.log(data);
+            if(data.error){
+                console.log(data.error);
+            }
+            else{
+                this.setState({
+                    firstname: data.firstname,
+                    lastname: data.lastname,
+                    org_email: data.email,
+                    address: data.address,
+                    org_name:data.orgname,
+                    error: ""
+                },console.log(this.state));
+            }
+        }
+        const id=this.props.match.params.empid;
+        getBasicsDetails(id);
     }
     render() {
         return (
