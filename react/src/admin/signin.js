@@ -55,7 +55,11 @@ class AdminSignIn extends Component {
         
         return true;
     }
+      // handleSubmit=event=>{
+    //     To be completed by Ayush
+    // }
     render() {
+        // Uncomment once redirect to refer is changed in hanldeSubmit
         // if(this.state.redirectToReferer)
         // {
         //     return <Redirect to={`/profile/${isAuthenticated().user._id}`}/>
@@ -106,7 +110,7 @@ class AdminSignIn extends Component {
                                 <div className="button-section">
                                     <input type="submit" name="Sign Up" />
                                     <span className="privacy-policy">
-                                    <p style={{fontSize: "14px",textAlign: "center"}}>Don't have an Account? <Link to="/signup">Create Account</Link></p> 
+                                    <p style={{fontSize: "14px",textAlign: "center"}}>Don't have an Account? <Link to="/admin-signup">Create Account</Link></p> 
                                     </span>
                                 </div>
                             </form>
