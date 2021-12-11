@@ -51,14 +51,13 @@ const userSchema=new mongoose.Schema({
         }
     ],
     about: String
-})
+}) 
 
 userSchema.virtual("password")
 .set(function(password){
     //create temp var _password
     this._password=password;//password=the password given by user
-    //generate timestamp
-   // this.salt=uuidv1();
+   
     //encrypt password
     this.hashed_password=this.encryptPassword(password);//func we will make
 })

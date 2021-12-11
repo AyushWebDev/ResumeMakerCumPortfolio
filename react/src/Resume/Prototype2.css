@@ -1,8 +1,15 @@
+.row2{
+    display: table;
+}
+.col{
+    display: table-cell;
+}
 .box2-1
 {
     background-color: rgb(78, 78, 78);
     color: rgb(226, 216, 216);
     padding-bottom: 25px;
+    
 }
 .col-sm-4,.col-sm-8
 {
@@ -11,6 +18,10 @@
 .box2-2
 {
     background-color: rgb(233, 224, 224);
+    
+}
+.titleCol1{
+    color: rgb(233, 224, 224);;
 }
 .box2-1 .row
 {

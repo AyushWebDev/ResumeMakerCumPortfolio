@@ -105,7 +105,7 @@ class SiderDemo extends React.Component {
               <Menu.Item key="8" style={{fontSize:'15px' }}>Jobs Opening</Menu.Item>
             </SubMenu>
             <Menu.Item key="9" icon={<FileOutlined />}>
-              Your Resume
+            <Link to={`/resume/2`}> Your Resume </Link>
             </Menu.Item>
             <Menu.Item key="10" icon={<LogoutOutlined />}>
                  <a onClick={()=>signout(()=>{this.props.history.push('/')})}>Sign-out</a> 
