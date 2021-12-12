@@ -2,6 +2,7 @@ const express=require("express");
 const Job=require("../model/job");
 const router=express.Router();
 const mongoose=require("mongoose");
+const { response } = require("express");
 
 router.post("/postJob",async (req,res)=>{
     try{
@@ -36,6 +37,19 @@ router.get("/getOrgJob/:id", async (req,res)=>{
         res.status(400).json({error: err});
         console.log(err);
     }
+})
+
+router.delete("/deleteOrgJob/:id",(req,res)=>{
+    const Id=req.params.id;
+   Job.deleteOne({_id: Id})
+   .then(()=>{
+       res.status(200).json({msg: "Job Deleted"});
+       console.log("Job deleted");
+   })
+   .catch(err=>{
+       res.status(400).json({error: err});
+       console.log(err);
+   })
 })
 
 module.exports=router;
