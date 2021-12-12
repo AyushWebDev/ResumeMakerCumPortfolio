@@ -5,7 +5,7 @@ import { Collapse } from 'antd';
 import { CaretRightOutlined,DeleteOutlined } from '@ant-design/icons';
 import { Form } from 'antd'
 import FormBuilder from 'antd-form-builder'
-import { getJob } from '../auth';
+import { getJob ,isAuthenticated } from '../auth';
 const { Panel } = Collapse;
 const text='Hi harsh this is collapse';
 const personalInfo = {
@@ -34,58 +34,50 @@ class ManageOpening extends Component {
     {
         super();
         this.state={
-            id: "",
-            firstname: '',
-            lastname: '',
-            org_email: '',
-            address: '',
-            org_title:'',
+            job: [],
             error: "",
             collapsed:false
         }
     }
     componentDidMount() {
         const getJobDetails=async (id)=>{
-            console.log('Fuction Called')
+            console.log('Fuction Called');
             const data=await getJob(id);
             console.log(data);
             if(data.error){
                 console.log(data.error);
             }
-            // else{
-            //     this.setState({
-            //         firstname: data.firstname,
-            //         lastname: data.lastname,
-            //         org_email: data.email,
-            //         address: data.address,
-            //         org_name:data.orgname,
-            //         error: ""
-            //     },console.log(this.state));
-            // }
+            else{
+                this.setState({
+                    job: data,
+                    error: ""
+                },console.log(this.state));
+            }
         }
-        const id=this.props.match.params.empid;
+        const id=isAuthenticated().emp._id;
         getJobDetails(id);
     }
     
     render() {
         return (
+            
+            
             <div>
                 <Collapse
                 bordered={false}
                 expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
                 className="site-collapse-custom-collapse"
             >
-                <Panel header="This is panel header 1" key="1" className="site-collapse-custom-panel" extra={<DeleteOutlined onClick={()=>{}}/>}>
-                <FormBuilder meta={meta} initialValues={personalInfo} viewMode />
-                </Panel>
-                <Panel header="This is panel header 2" key="2" className="site-collapse-custom-panel">
-                <p>{text}</p>
-                </Panel>
-                <Panel header="This is panel header 3" key="3" className="site-collapse-custom-panel">
-                <p>{text}</p>
-                </Panel>
+                {this.state.job.map((j,k)=>(
+                    <Panel header={j.title} key={k} className="site-collapse-custom-panel" extra={<DeleteOutlined onClick={()=>{}}/>}>
+                    <FormBuilder meta={meta} initialValues={personalInfo} viewMode />
+                    </Panel>
+                ))}
+               
+                
             </Collapse>
             </div>
+            
         );
     }
 }
