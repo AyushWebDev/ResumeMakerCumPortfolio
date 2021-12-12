@@ -19,14 +19,16 @@ const personalInfo = {
   const meta = {
     columns: 2,
     fields: [
-      { key: 'name.first', label: 'First Name' },
-      { key: 'name.last', label: 'Last Name' },
-      { key: 'gender', label: 'Gender' },
-      { key: 'email', label: 'Email' },
-      { key: 'phone', label: 'Phone' },
-      { key: 'address', label: 'Address', colSpan: 2 },
-      { key: 'city', label: 'City' },
-      { key: 'zipCode', label: 'Zip Code' },
+      { key: 'org.orgname', label: 'Company',colSpan:2 },
+      { key: 'title', label: 'Job Title' },
+      { key: 'location', label: 'Location' },
+      { key: 'applicants.length', label: 'Applicants'},
+      { key: 'openings', label: 'Openings' },
+      { key: 'eligibility.edu', label: 'Qualification',},
+      { key: 'eligibility.exp', label: 'Experience' },
+      { key: 'description', label: 'Job Desc',colSpan:2 },
+      { key: 'eligibility.description', label: 'Requirement',colSpan:2 },
+
     ],
   }
 class ManageOpening extends Component {
@@ -70,7 +72,7 @@ class ManageOpening extends Component {
             >
                 {this.state.job.map((j,k)=>(
                     <Panel header={j.title} key={k} className="site-collapse-custom-panel" extra={<DeleteOutlined onClick={()=>{}}/>}>
-                    <FormBuilder meta={meta} initialValues={personalInfo} viewMode />
+                    <FormBuilder meta={meta} initialValues={j} viewMode />
                     </Panel>
                 ))}
                
