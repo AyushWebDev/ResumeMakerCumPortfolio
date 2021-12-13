@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import 'antd/dist/antd.css';
 import './styles.css';
+import { message } from 'antd';
 import { Collapse } from 'antd';
 import { CaretRightOutlined,DeleteOutlined } from '@ant-design/icons';
 import { Form } from 'antd'
 import FormBuilder from 'antd-form-builder'
-import { getJob ,isAuthenticated } from '../auth';
+import { getJob ,isAuthenticated, deleteJob } from '../auth';
 const { Panel } = Collapse;
 const text='Hi harsh this is collapse';
 const personalInfo = {
@@ -40,24 +41,48 @@ class ManageOpening extends Component {
             error: "",
             collapsed:false
         }
+        
+    }
+    
+    getJobDetails=async (id)=>{
+        console.log('Fuction Called');
+        const data=await getJob(id);
+        console.log(data);
+        if(data.error){
+            console.log(data.error);
+        }
+        else{
+            this.setState({
+                job: data,
+                error: ""
+            },console.log(this.state));
+        }
     }
     componentDidMount() {
-        const getJobDetails=async (id)=>{
-            console.log('Fuction Called');
-            const data=await getJob(id);
+       
+        const id=isAuthenticated().emp._id;
+        this.getJobDetails(id);
+    }
+
+    handleDelete=(jid)=>{
+        const id=isAuthenticated().emp._id;
+        
+        const delJob=async (j)=>{
+            console.log('delete called');
+            const data=await deleteJob(j);
             console.log(data);
             if(data.error){
                 console.log(data.error);
             }
             else{
-                this.setState({
-                    job: data,
-                    error: ""
-                },console.log(this.state));
+                message.success(data.msg);
+                console.log("done");
+                this.getJobDetails(id);
             }
         }
-        const id=isAuthenticated().emp._id;
-        getJobDetails(id);
+        
+        delJob(jid);
+       
     }
     
     render() {
@@ -71,7 +96,7 @@ class ManageOpening extends Component {
                 className="site-collapse-custom-collapse"
             >
                 {this.state.job.map((j,k)=>(
-                    <Panel header={j.title} key={k} className="site-collapse-custom-panel" extra={<DeleteOutlined onClick={()=>{}}/>}>
+                    <Panel header={j.title} key={k} className="site-collapse-custom-panel" extra={<DeleteOutlined onClick={()=>this.handleDelete(j._id)}/>}>
                     <FormBuilder meta={meta} initialValues={j} viewMode />
                     </Panel>
                 ))}

@@ -106,3 +106,18 @@ export const getJob=async (orgid)=>{
     }
 }
 
+export const deleteJob=async (orgid)=>{
+    try{
+        const response=await fetch(`http://localhost:8000/job/deleteOrgJob/${orgid}`,{ 
+            method: "DELETE", 
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json" 
+            }
+        });
+        return response.json();
+    }catch(e){
+        console.log(e);
+    }
+}
+
