@@ -8,7 +8,8 @@ import {
   UsergroupAddOutlined,
   PieChartOutlined,
   ProfileOutlined,
-  LogoutOutlined
+  LogoutOutlined,
+  HomeOutlined
 } from '@ant-design/icons';
 import Text from 'antd/lib/typography/Text';
 import ManageOpenening from './adminComponents/manageopening';
@@ -78,6 +79,9 @@ class AdminProfile extends Component {
             </Menu.Item>
             <Menu.Item key="3" icon={<ProfileOutlined />}>
             <Link to={`/admin-profile/${isAuthenticated().emp._id}/job-applicants/${isAuthenticated().emp._id}`}>Job Applications</Link> 
+            </Menu.Item>
+            <Menu.Item key="5" icon={<HomeOutlined />}>
+              <Link to="/">Homepage</Link>
             </Menu.Item>
             <Menu.Item key="4" icon={<LogoutOutlined />}>
                  <a onClick={()=>signout(()=>{this.props.history.push('/')})}>Sign-out</a> 
