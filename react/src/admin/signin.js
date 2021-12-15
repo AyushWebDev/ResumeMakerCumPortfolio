@@ -88,7 +88,7 @@ class AdminSignIn extends Component {
         // Uncomment once redirect to refer is changed in hanldeSubmit
         if(this.state.redirectToReferer)
         {
-            return <Redirect to={`/admin-profile/${isAuthenticated().emp._id}`}/>
+            return <Redirect to={`/admin-profile/${isAuthenticated().emp._id}/manage/${isAuthenticated().emp._id}`}/>
         }
         return (
             <div className="sign">

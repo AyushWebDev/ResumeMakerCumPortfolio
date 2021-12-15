@@ -25,7 +25,7 @@ const personalInfo = {
       { key: 'contacts.phone', label: 'Phone'},
       { key: 'contacts.linkedin', label: 'LinkedIn'},
       { key: 'email', label: 'Email'},
-
+      {key:'_id',label:'id'}
     ],
   }
 class ManageOpening extends Component {

@@ -38,6 +38,25 @@ router.get("/getOrgJob/:id", async (req,res)=>{
         console.log(err);
     }
 })
+router.get("/getAllJob", async (req,res)=>{
+    try{
+        const job=await Job.find().populate({path: 'org'});
+        if(!job){
+            res.status(404).json({
+                error: "Data not found"
+            })
+        }
+        else{
+           res.status(200).json(job);
+        }
+
+    }
+    catch(err)
+    {
+        res.status(400).json({error: err});
+        console.log(err);
+    }
+})
 
 router.get("/getOrgJobWithApplicants/:id", async (req,res)=>{
     try{
