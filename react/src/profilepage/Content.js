@@ -11,7 +11,8 @@ import {
   FileOutlined,
   TeamOutlined,
   UserOutlined,
-  LogoutOutlined
+  LogoutOutlined,
+  HomeOutlined
 } from '@ant-design/icons';
 import Achievement  from '../components/achievement';
 import Skill from '../components/skill';
@@ -106,6 +107,9 @@ class SiderDemo extends React.Component {
             </SubMenu>
             <Menu.Item key="9" icon={<FileOutlined />}>
             <Link to={`/resume/2`}> Your Resume </Link>
+            </Menu.Item>
+            <Menu.Item key="2" icon={<HomeOutlined />}>
+              <Link to="/">Homepage</Link>
             </Menu.Item>
             <Menu.Item key="10" icon={<LogoutOutlined />}>
                  <a onClick={()=>signout(()=>{this.props.history.push('/')})}>Sign-out</a> 

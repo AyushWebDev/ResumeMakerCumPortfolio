@@ -1,7 +1,8 @@
 import React ,{Component} from 'react';
 import './Prototype2.css';
 import Testdata from '../TestData';
-import {getUser,isAuthenticated} from '../user/auth';
+import {signout,isAuthenticated,getUser} from '../user/auth';
+import {Link} from 'react-router-dom';
 
 class Prototype2 extends Component{
     constructor(props)
@@ -30,6 +31,49 @@ class Prototype2 extends Component{
     render()
     {
         return(
+            <div>
+            <nav class="navbar  navbar-expand-lg navbar-dark" data-aos="zoom-in" data-aos-duration="1000">
+            <p className="navbar-brand " style={{paddingTop:'10px'}}><i className="fas fa-toolbox " style={{fontSize:'24 px'}}></i>Resume Maker Cum Portfolio </p>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse flex flex-row-reverse " id="navb">
+                <ul class="navbar-nav  ">
+                    {this.props.match.url!=='/' &&
+                    <li class="nav-item"> 
+                        <Link class="nav-link" to="/"><button className="btn" style={{backgroundColor: "black",color: "white",padding: "2px"}}><span><i class="far fa-file"></i></span>Homepage</button></Link>
+                    </li>
+                    }
+                    {isAuthenticated().user &&
+                    <li class="nav-item"> 
+                        <Link to={`/profile/${isAuthenticated().user._id}/profilecard/${isAuthenticated().user._id}`} class="nav-link"><button className="btn" style={{backgroundColor: "black",color: "white",padding: "2px"}}><span><i class="fas fa-file-signature"></i></span>My Portfolio</button></Link> 
+                    </li>
+                    }
+                    {isAuthenticated().user && this.props.match.url!=="/resume/2" &&
+                    <li class="nav-item"> 
+                        <Link to={`/resume/2`} class="nav-link"><button className="btn" style={{backgroundColor: "black",color: "white",padding: "2px"}}><span><i class="fas fa-file-signature"></i></span>My Resume</button></Link> 
+                    </li>
+                    }
+                    {!isAuthenticated() &&
+                    <li class="nav-item"> 
+                            <Link to="/signin" class="nav-link"><button className="btn" style={{backgroundColor: "black",color: "white",padding: "2px"}}><span><i class="fas fa-sign-in-alt"></i></span>Sign-in</button></Link> 
+                    </li>
+                    }
+                    {isAuthenticated() &&
+                    <li class="nav-item"> 
+                            
+                             <a className="nav-link" onClick={()=>signout(()=>{this.props.history.push('/')})}><button className="btn" style={{backgroundColor: "black",color: "white",padding: "2px"}}><span><i class="fas fa-sign-in-alt"></i></span>Sign-out</button></a> 
+                    </li>
+                    }
+                    {!isAuthenticated() &&
+                    <li class="nav-item"> 
+                        <Link to="/signup" class="nav-link"><button className="btn" style={{backgroundColor: "black",color: "white",padding: "2px"}}><span><i class="fas fa-user-plus"></i></span>Register</button></Link>
+                    </li>
+                    }
+                </ul>
+               
+            </div>
+        </nav>
             <div className="container" style={{marginTop: "40px"}}>
                 <div className="row">
                     <div className="col-sm-12 box2-1">
@@ -46,14 +90,17 @@ class Prototype2 extends Component{
                                     <td classname="col"><i className="fas fa-phone"></i></td>
                                     <td classname="col" style={{textAlign: "right"}}>{this.state.user.contacts.phone}</td>
                                 </tr>
+                                <br/>
                                 <tr classname="row2">
                                     <td classname="col"><i className="fas fa-map-marker-alt"></i></td>
                                     <td classname="col" style={{textAlign: "right"}}>{this.state.user.contacts.address}</td>    
                                 </tr>
+                                <br/>
                                 <tr classname="row2">
                                     <td classname="col"><i className="far fa-envelope"></i></td>
                                     <td classname="col" style={{textAlign: "right"}}>{this.state.user.email}</td>
                                 </tr>
+                                <br/>
                                 <tr classname="row2">
                                     <td classname="col"><i className="fab fa-linkedin-in"></i></td>
                                     <td classname="col" style={{textAlign: "right"}}>{this.state.user.contacts.linkedin}</td>
@@ -75,21 +122,7 @@ class Prototype2 extends Component{
                                 );
                             })}
                             </div>
-                            <h3 className="titleCol1">ACHIEVMENTS</h3>
-                            <div style={{paddingBottom: "25px"}}>
-                            {this.state.user.achievements.map((value)=>{
-                                return(
-                                    <div className="row" style={{paddingBottom: "20px"}}>
-                                        <div className="col-sm-5">
-                                        {value.title}
-                                        </div>
-                                        <div className="col-sm-7">
-                                            <small style={{fontSize: "15px"}}>{value.description}</small>
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                            </div>
+                           
                     </div>
                     <div className="col-sm-7 box2-2 col" style={{paddingBottom: "px"}}>
                         <h3>WORK EXPERIENCE</h3>
@@ -118,9 +151,24 @@ class Prototype2 extends Component{
                                 </div>
                                 );
                              })}
-                        
+                         <h3>ACHIEVMENTS</h3>
+                            <div style={{paddingBottom: "25px"}}>
+                            {this.state.user.achievements.map((value)=>{
+                                return(
+                                    <div className="row" style={{marginTop: "20px",marginBottom: "20px",padding: "20px 20px"}}>
+                                        <div className="col-sm-4">
+                                        {value.title}
+                                        </div>
+                                        <div className="col-sm-8">
+                                            <small>{value.description}</small>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                            </div>
                     </div>
                 </div>
+            </div>
             </div>
         );
     }

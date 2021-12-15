@@ -86,15 +86,22 @@ class HomePage extends Component
                     </button>
                     <div class="collapse navbar-collapse flex flex-row-reverse " id="navb">
                         <ul class="navbar-nav  ">
+                            {this.props.match.url!=="/" &&
                             <li class="nav-item"> 
-                                <Link class="nav-link" to="/prototype2"><button className="btn" style={{backgroundColor: "black",color: "white",padding: "2px"}}><span><i class="far fa-file"></i></span>Resume Template</button></Link>
+                                <Link class="nav-link" to="/"><button className="btn" style={{backgroundColor: "black",color: "white",padding: "2px"}}><span><i class="far fa-file"></i></span>Homepage</button></Link>
                             </li>
-                            {isAuthenticated() &&
+                            }    
+                            {isAuthenticated().emp &&
                             <li class="nav-item"> 
-                                <Link to={`/profile/${isAuthenticated().user_id}/profilecard/${isAuthenticated().user_id}`} class="nav-link"><button className="btn" style={{backgroundColor: "black",color: "white",padding: "2px"}}><span><i class="fas fa-file-signature"></i></span>My Portfolio</button></Link> 
+                                <Link to={`/admin-profile/${isAuthenticated().emp._id}`} class="nav-link"><button className="btn" style={{backgroundColor: "black",color: "white",padding: "2px"}}><span><i class="fas fa-file-signature"></i></span>My Profile</button></Link> 
+                            </li>
+                            }               
+                            {isAuthenticated().user &&
+                            <li class="nav-item"> 
+                                <Link to={`/profile/${isAuthenticated().user._id}/profilecard/${isAuthenticated().user._id}`} class="nav-link"><button className="btn" style={{backgroundColor: "black",color: "white",padding: "2px"}}><span><i class="fas fa-file-signature"></i></span>My Portfolio</button></Link> 
                             </li>
                             }
-                            {isAuthenticated() &&
+                            {isAuthenticated().user &&
                             <li class="nav-item"> 
                                 <Link to={`/resume/2`} class="nav-link"><button className="btn" style={{backgroundColor: "black",color: "white",padding: "2px"}}><span><i class="fas fa-file-signature"></i></span>My Resume</button></Link> 
                             </li>

@@ -106,6 +106,22 @@ export const getJob=async (orgid)=>{
     }
 }
 
+export const getJobApplications=async (orgid)=>{
+    try{
+        const response=await fetch(`http://localhost:8000/job/getOrgJobWithApplicants/${orgid}`,{ 
+            method: "GET", 
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json" 
+            }
+        });
+        return response.json();
+    }catch(e){
+        console.log(e);
+    }
+}
+
+
 export const deleteJob=async (orgid)=>{
     try{
         const response=await fetch(`http://localhost:8000/job/deleteOrgJob/${orgid}`,{ 
