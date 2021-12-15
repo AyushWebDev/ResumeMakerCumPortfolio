@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import 'antd/dist/antd.css';
 import './styles.css';
 import { message } from 'antd';
-import { Collapse } from 'antd';
+import { Collapse,Button } from 'antd';
 import { CaretRightOutlined,DeleteOutlined } from '@ant-design/icons';
 import { Form } from 'antd'
 import FormBuilder from 'antd-form-builder'
-import { getJobApplications ,isAuthenticated } from '../auth';
+import { getJobApplications ,isAuthenticated, removeApplicant } from '../auth';
+import {Link} from 'react-router-dom';
 const { Panel } = Collapse;
 const text='Hi harsh this is collapse';
 const personalInfo = {
@@ -54,6 +55,21 @@ class ManageOpening extends Component {
             },console.log(this.state));
         }
     }
+
+    removeApplication=async (aid,oid)=>{
+        console.log('Fuction Called');
+        const data=await removeApplicant(oid,aid);
+        console.log(data);
+        if(data.error){
+            console.log(data.error);
+        }
+        else{
+            message.success("Applicant Rejected");
+            const id=isAuthenticated().emp._id;
+            this.getJobDetails(id);
+        }
+    }
+
     componentDidMount() {
        
         const id=isAuthenticated().emp._id;
@@ -74,8 +90,11 @@ class ManageOpening extends Component {
             >
                 {this.state.job.map((j,k)=>(
                     j.applicants.map((a,i)=>(
-                        <Panel header={j.title} key={i} className="site-collapse-custom-panel" extra={<DeleteOutlined onClick={()=>{}}/>}>
+                        <Panel header={j.title} key={i} className="site-collapse-custom-panel" extra={<DeleteOutlined onClick={()=>this.removeApplication(a._id,j._id)}/>}>
                         <FormBuilder meta={meta} initialValues={a} viewMode />
+                        <Button>
+                            <Link to={`/profile/${a._id}/profilecard/${a._id}`}>View Profile</Link>
+                        </Button>
                         </Panel>
                     ))
                    

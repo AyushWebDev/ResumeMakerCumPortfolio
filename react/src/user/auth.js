@@ -315,5 +315,21 @@ export const getAllJob=async ()=>{
     }
 }
 
+export const applyJob=async (orgId,applicantId)=>{
+    try{
+        const response=await fetch(`http://localhost:8000/job/addApplicant/${orgId}`,{ 
+            method: "PUT", 
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json" 
+            },
+            body: JSON.stringify({id: applicantId})
+        });
+        return response.json();
+    }catch(e){
+        console.log(e);
+    }
+}
+
 //export default signup;
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {getAllJob} from '../user/auth';
-import { Button, Collapse } from 'antd';
+import {getAllJob,isAuthenticated,applyJob} from '../user/auth';
+import { Button, Collapse , message} from 'antd';
 import { CaretRightOutlined,DeleteOutlined } from '@ant-design/icons';
 import FormBuilder from 'antd-form-builder'
 const { Panel } = Collapse;
@@ -42,10 +42,25 @@ class JobOpening extends Component {
             },console.log(this.state));
         }
     }
+
+    apply=async (aid,oid)=>{
+        const data=await applyJob(oid,aid);
+        console.log(data);
+        if(data.error){
+            console.log(data.error);
+        }
+        else{
+            message.success("Applied Successfully");
+            this.getAllJobs();
+        }
+    }
+
     componentDidMount() {
-        console.clear();
         this.getAllJobs();
     }
+
+   
+
     render() {
         return (
             <div>
@@ -54,18 +69,22 @@ class JobOpening extends Component {
             expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
             className="site-collapse-custom-collapse"
         >
-            {this.state.job.map((value,index)=>(
+            {this.state.job.map((value,index)=>{
+                    
+                    if(value.applicants.findIndex((a)=>{return a._id===isAuthenticated().user._id})===-1){
+                        return(
                     <Panel header={value.title} key={index} className="site-collapse-custom-panel" extra={
                         <div style={{display:'flex',height:'30%',overflowX:'hidden',textOverflow:'ellipsis'}}>
                             {value.org.orgname}
                         </div>
                     }>
                     <FormBuilder meta={meta} initialValues={value} viewMode />
-                    <Button>
+                    <Button onClick={()=>this.apply(isAuthenticated().user._id,value._id)}>
                         Apply Now
                     </Button>
                     </Panel>
-                )
+                     )}
+            }
             )}
            
             

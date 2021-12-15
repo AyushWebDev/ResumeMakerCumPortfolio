@@ -83,11 +83,9 @@ class SiderDemo extends React.Component {
           <div className="logo" />
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" style={{fontSize:'17px',marginTop:'30%'}}>
             <Menu.Item key="profile" icon={<PieChartOutlined />}>
-            <Link to={`/profile/${this.props.match.params.userid}/profilecard/${this.props.match.params.userid}`}>Your Profile</Link>
+            <Link to={`/profile/${this.props.match.params.userid}/profilecard/${this.props.match.params.userid}`}>Profile</Link>
             </Menu.Item>
-            <Menu.Item key="2" icon={<DesktopOutlined />}>
-              Your Information
-            </Menu.Item>
+           
             <SubMenu key="sub1" icon={<UserOutlined />} title="User Info" >
               <Menu.Item key="3" style={{fontSize:'15px' }}>
                 <Link to={`/profile/${this.props.match.params.userid}/edu/${this.props.match.params.userid}`}>Education </Link>
@@ -101,16 +99,21 @@ class SiderDemo extends React.Component {
               <Menu.Item key="6" style={{fontSize:'15px' }}>
                 <Link to={`/profile/${this.props.match.params.userid}/skill/${this.props.match.params.userid}`}>Skills</Link>
              </Menu.Item>
+           
             </SubMenu>
+            { isAuthenticated().user &&
             <SubMenu key="sub2" icon={<TeamOutlined />} title="Job Info">
               <Menu.Item key="7" style={{fontSize:'15px' }}>
               <Link to={`/profile/${this.props.match.params.userid}/job-openings/${this.props.match.params.userid}`}> Jobs Openings</Link>
               </Menu.Item>
               <Menu.Item key="8" style={{fontSize:'15px' }}>Jobs Applicants</Menu.Item>
             </SubMenu>
+            }
+            
             <Menu.Item key="9" icon={<FileOutlined />}>
-            <Link to={`/resume/2`}> Your Resume </Link>
+            <Link to={`/resume/2/${this.props.match.params.userid}`}> Resume </Link>
             </Menu.Item>
+            
             <Menu.Item key="10" icon={<HomeOutlined />}>
               <Link to="/">Homepage</Link>
             </Menu.Item>

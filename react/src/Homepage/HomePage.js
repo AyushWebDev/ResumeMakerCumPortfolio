@@ -103,7 +103,7 @@ class HomePage extends Component
                             }
                             {isAuthenticated().user &&
                             <li class="nav-item"> 
-                                <Link to={`/resume/2`} class="nav-link"><button className="btn" style={{backgroundColor: "black",color: "white",padding: "2px"}}><span><i class="fas fa-file-signature"></i></span>My Resume</button></Link> 
+                                <Link to={`/resume/2/${isAuthenticated().user._id}`} class="nav-link"><button className="btn" style={{backgroundColor: "black",color: "white",padding: "2px"}}><span><i class="fas fa-file-signature"></i></span>My Resume</button></Link> 
                             </li>
                             }
                             {!isAuthenticated() &&
