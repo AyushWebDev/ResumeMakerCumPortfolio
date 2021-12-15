@@ -21,6 +21,7 @@ import Edu from '../components/edu';
 import Profile from '../user/profile';
 import Text from 'antd/lib/typography/Text';
 import { signout } from '../user/auth';
+import JobOpening from '../components/jobOpening';
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -102,16 +103,18 @@ class SiderDemo extends React.Component {
              </Menu.Item>
             </SubMenu>
             <SubMenu key="sub2" icon={<TeamOutlined />} title="Job Info">
-              <Menu.Item key="7" style={{fontSize:'15px' }}>Jobs Applications</Menu.Item>
-              <Menu.Item key="8" style={{fontSize:'15px' }}>Jobs Opening</Menu.Item>
+              <Menu.Item key="7" style={{fontSize:'15px' }}>
+              <Link to={`/profile/${this.props.match.params.userid}/job-openings/${this.props.match.params.userid}`}> Jobs Openings</Link>
+              </Menu.Item>
+              <Menu.Item key="8" style={{fontSize:'15px' }}>Jobs Applicants</Menu.Item>
             </SubMenu>
             <Menu.Item key="9" icon={<FileOutlined />}>
             <Link to={`/resume/2`}> Your Resume </Link>
             </Menu.Item>
-            <Menu.Item key="2" icon={<HomeOutlined />}>
+            <Menu.Item key="10" icon={<HomeOutlined />}>
               <Link to="/">Homepage</Link>
             </Menu.Item>
-            <Menu.Item key="10" icon={<LogoutOutlined />}>
+            <Menu.Item key="11" icon={<LogoutOutlined />}>
                  <a onClick={()=>signout(()=>{this.props.history.push('/')})}>Sign-out</a> 
             </Menu.Item>
           </Menu>
@@ -140,7 +143,8 @@ class SiderDemo extends React.Component {
                <Route exact path='/profile/:userid/edu/:id' component={Edu}></Route>
                <Route exact path='/profile/:userid/work/:id' component={Work}></Route>
                <Route exact path='/profile/:userid/skill/:id' component={Skill}></Route>
-               <Route exact path='/profile/:userid/achievement/:id' component={Achievement}></Route>                         
+               <Route exact path='/profile/:userid/achievement/:id' component={Achievement}></Route>    
+               <Route exact path ='/profile/:userid/job-openings/:id' component={JobOpening}></Route>
             </Switch>
             </Col>
             </div>

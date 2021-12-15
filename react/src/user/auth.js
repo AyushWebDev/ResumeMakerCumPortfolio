@@ -300,8 +300,20 @@ export const isAuthenticated=()=>{
     }
     return false;
 };
-
-
+export const getAllJob=async ()=>{
+    try{
+        const response=await fetch(`http://localhost:8000/job/getAllJob`,{ 
+            method: "GET", 
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json" 
+            }
+        });
+        return response.json();
+    }catch(e){
+        console.log(e);
+    }
+}
 
 //export default signup;
 
