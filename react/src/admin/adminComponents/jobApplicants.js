@@ -90,10 +90,10 @@ class ManageOpening extends Component {
             >
                 {this.state.job.map((j,k)=>(
                     j.applicants.map((a,i)=>(
-                        <Panel header={j.title} key={i} className="site-collapse-custom-panel" extra={<DeleteOutlined onClick={()=>this.removeApplication(a._id,j._id)}/>}>
+                        <Panel header={j.title} key={k} className="site-collapse-custom-panel" extra={<DeleteOutlined onClick={()=>this.removeApplication(a._id,j._id)}/>}>
                         <FormBuilder meta={meta} initialValues={a} viewMode />
                         <Button>
-                            <Link to={`/profile/${a._id}/profilecard/${a._id}`}>View Profile</Link>
+                            <Link to={`/profile/${a._id}/profilecard/${a._id}`} target='_blank'>View Profile</Link>
                         </Button>
                         </Panel>
                     ))
