@@ -137,3 +137,21 @@ export const deleteJob=async (orgid)=>{
     }
 }
 
+export const removeApplicant=async (orgId,applicantId)=>{
+    try{
+        const response=await fetch(`http://localhost:8000/job/removeApplicant/${orgId}`,{ 
+            method: "PUT", 
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json" 
+            },
+            body: JSON.stringify({id: applicantId})
+        });
+        return response.json();
+    }catch(e){
+        console.log(e);
+    }
+}
+
+
+

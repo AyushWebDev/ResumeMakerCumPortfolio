@@ -104,8 +104,11 @@ class Edu extends React.Component{
         this.getEduDetails(this.state.id);
     }
     handleDelete=(eid)=>{
+        if(isAuthenticated().user)
+        {
         this.deleteEdu(eid);
         message.warning('Field Deleted from your profile');
+        }
     }
     handleCancel(){this.setState({isModalVisible:false})}
     handleOk(){this.setState({isModalVisible:false},()=>{this.handleSubmit()})}

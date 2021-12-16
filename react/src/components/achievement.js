@@ -42,8 +42,11 @@ class Achievement extends React.Component{
         this.getAchDetails(this.state.id);
     }
     handleDelete=(eid)=>{
+        if(isAuthenticated().user)
+        {
         this.deleteAch(eid);
         message.warning('Field Deleted from your profile');
+        }
     }
     openModal(){
         this.setState({isModalVisible:true});

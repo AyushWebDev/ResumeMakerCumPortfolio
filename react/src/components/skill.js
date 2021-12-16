@@ -47,8 +47,11 @@ class Skill extends React.Component{
         this.getSkillDetails(this.state.id);
     }
     handleDelete=(eid)=>{
+        if(isAuthenticated().user)
+        {
         this.deleteSkill(eid);
         message.warning('Field Deleted from your profile');
+        }
     }
     handleChange=name=>event=>{
         this.setState({

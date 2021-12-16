@@ -95,8 +95,11 @@ class Work extends React.Component{
         this.getWorkDetails(this.state.id);
     }
     handleDelete=(eid)=>{
+        if(isAuthenticated().user)
+        {
         this.deleteWork(eid);
         message.warning('Field Deleted from your profile');
+        }
     }
     render(){
         return(

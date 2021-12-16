@@ -9,7 +9,7 @@ class Prototype2 extends Component{
     {
         super(props);
         this.state={
-            id: isAuthenticated().user._id,
+            id: this.props.match.params.userid,
             user: Testdata
         };
     }
@@ -49,7 +49,7 @@ class Prototype2 extends Component{
                         <Link to={`/profile/${isAuthenticated().user._id}/profilecard/${isAuthenticated().user._id}`} class="nav-link"><button className="btn" style={{backgroundColor: "black",color: "white",padding: "2px"}}><span><i class="fas fa-file-signature"></i></span>My Portfolio</button></Link> 
                     </li>
                     }
-                    {isAuthenticated().user && this.props.match.url!=="/resume/2" &&
+                    {isAuthenticated().user && this.props.match.url!==`/resume/2/${isAuthenticated().user._id}` &&
                     <li class="nav-item"> 
                         <Link to={`/resume/2`} class="nav-link"><button className="btn" style={{backgroundColor: "black",color: "white",padding: "2px"}}><span><i class="fas fa-file-signature"></i></span>My Resume</button></Link> 
                     </li>
