@@ -113,10 +113,7 @@ class SiderDemo extends React.Component {
             <Menu.Item key="9" icon={<FileOutlined />}>
             <Link to={`/resume/2/${this.props.match.params.userid}`}> Resume </Link>
             </Menu.Item>
-<<<<<<< HEAD
-=======
             
->>>>>>> ccb6564b55eb0ea2b52d69905dda56a5730c2f5e
             <Menu.Item key="10" icon={<HomeOutlined />}>
               <Link to="/">Homepage</Link>
             </Menu.Item>

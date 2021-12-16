@@ -314,8 +314,6 @@ export const getAllJob=async ()=>{
         console.log(e);
     }
 }
-<<<<<<< HEAD
-=======
 
 export const applyJob=async (orgId,applicantId)=>{
     try{
@@ -332,7 +330,6 @@ export const applyJob=async (orgId,applicantId)=>{
         console.log(e);
     }
 }
->>>>>>> ccb6564b55eb0ea2b52d69905dda56a5730c2f5e
 
 //export default signup;
 
