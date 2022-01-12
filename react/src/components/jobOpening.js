@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {getAllJob,isAuthenticated,applyJob} from '../user/auth';
 import { Button, Collapse , message} from 'antd';
 import { CaretRightOutlined,DeleteOutlined } from '@ant-design/icons';
-import FormBuilder from 'antd-form-builder'
+import FormBuilder from 'antd-form-builder';
 const { Panel } = Collapse;
 const meta = {
     columns: 2,
